@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Resmi | PP Riyadul Hikmah</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pesantren: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        emas: '#d97706'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- Navbar -->
+    <nav class="bg-pesantren-800 text-white sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-3">
+                    <!-- Placeholder Logo -->
+                    <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-pesantren-800 font-bold text-xl">
+                        RH
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-bold text-lg leading-tight">PP Riyadul Hikmah</span>
+                        <span class="text-xs text-pesantren-100">Yayasan Riyadul Hikmah Mekarrahayu</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-6 text-sm font-medium">
+                    <a href="#" class="hover:text-emas transition">Beranda</a>
+                    <a href="#lembaga" class="hover:text-emas transition">Lembaga</a>
+                    <a href="#berita" class="hover:text-emas transition">Berita</a>
+                    <a href="#galeri" class="hover:text-emas transition">Galeri</a>
+                    <a href="#" class="bg-emas hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition shadow-md">Portal Login</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-white hover:text-emas focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-pesantren-900 text-white overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <!-- Background pattern or image placeholder -->
+            <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Masjid Background" class="w-full h-full object-cover">
+        </div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 flex flex-col items-center text-center">
+            <span class="text-emas font-semibold tracking-wider uppercase text-sm mb-4">Yayasan Riyadul Hikmah Mekarrahayu</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-md">
+                Pondok Pesantren <br> <span class="text-pesantren-100">Riyadul Hikmah</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-200 max-w-2xl mb-10">
+                Mencetak generasi Islami yang unggul dalam ilmu pengetahuan, berakhlak mulia, dan mandiri untuk kemajuan bangsa dan agama.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="#" class="bg-emas hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition transform hover:-translate-y-1">
+                    Informasi PPDB 2027
+                </a>
+                <a href="#lembaga" class="bg-transparent border-2 border-white hover:bg-white hover:text-pesantren-900 text-white font-bold py-3 px-8 rounded-lg transition">
+                    Jelajahi Unit Pendidikan
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Unit Pendidikan (Lembaga) Section -->
+    <section id="lembaga" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Unit Pendidikan</h2>
+                <div class="w-24 h-1 bg-emas mx-auto mt-4 rounded"></div>
+                <p class="mt-4 text-gray-600">Sistem pendidikan terpadu dari usia dini hingga menengah atas.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- PAUD -->
+                <div class="bg-slate-50 rounded-xl border border-gray-100 p-8 shadow-sm hover:shadow-xl transition flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-pesantren-100 text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">PAUD Kober Al-Hasani</h3>
+                    <p class="text-gray-600 mb-6 text-sm">Pendidikan usia dini yang berfokus pada pembentukan karakter Islami, kreativitas, dan kemandirian anak.</p>
+                    <a href="#" class="mt-auto text-pesantren-600 font-semibold hover:text-pesantren-800">Lihat Profil <i class="fas fa-arrow-right text-xs ml-1"></i></a>
+                </div>
+
+                <!-- MTs -->
+                <div class="bg-slate-50 rounded-xl border border-gray-100 p-8 shadow-sm hover:shadow-xl transition flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-pesantren-100 text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">MTs Darul Hikmah</h3>
+                    <p class="text-gray-600 mb-6 text-sm">Madrasah Tsanawiyah dengan kurikulum terpadu antara ilmu agama (kepesantrenan) dan ilmu pengetahuan umum.</p>
+                    <a href="#" class="mt-auto text-pesantren-600 font-semibold hover:text-pesantren-800">Lihat Profil <i class="fas fa-arrow-right text-xs ml-1"></i></a>
+                </div>
+
+                <!-- MA -->
+                <div class="bg-slate-50 rounded-xl border border-gray-100 p-8 shadow-sm hover:shadow-xl transition flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-pesantren-100 text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">MA Darul Hikmah</h3>
+                    <p class="text-gray-600 mb-6 text-sm">Madrasah Aliyah yang membekali santri dengan pemahaman kitab kuning, sains, dan kesiapan melanjutkan pendidikan tinggi.</p>
+                    <a href="#" class="mt-auto text-pesantren-600 font-semibold hover:text-pesantren-800">Lihat Profil <i class="fas fa-arrow-right text-xs ml-1"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Berita & Informasi (Mengadopsi gaya Portal SID) -->
+    <section id="berita" class="py-16 bg-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-10">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800">Kabar Pesantren</h2>
+                    <div class="w-24 h-1 bg-emas mt-3 rounded"></div>
+                </div>
+                <a href="#" class="text-pesantren-600 font-medium hover:underline hidden sm:block">Lihat Semua Berita</a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Artikel 1 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow border border-gray-200">
+                    <div class="h-48 bg-gray-300 relative">
+                        <!-- Placeholder Image -->
+                        <div class="absolute inset-0 flex items-center justify-center text-gray-500">
+                            <i class="fas fa-image text-4xl"></i>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-pesantren-600 text-white text-xs font-bold px-3 py-1 rounded">Pengumuman</span>
+                    </div>
+                    <div class="p-5">
+                        <div class="text-xs text-gray-500 mb-2"><i class="far fa-calendar-alt mr-1"></i> 15 November 2026</div>
+                        <h3 class="font-bold text-lg mb-2 line-clamp-2">Pembukaan Pendaftaran Santri Baru (PPDB) Tahun Ajaran 2027/2028</h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">Yayasan Riyadul Hikmah Mekarrahayu resmi membuka pendaftaran untuk unit PAUD, MTs, dan MA Darul Hikmah secara terpadu...</p>
+                        <a href="#" class="text-pesantren-600 font-medium text-sm">Baca selengkapnya &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Artikel 2 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow border border-gray-200">
+                    <div class="h-48 bg-gray-300 relative">
+                        <div class="absolute inset-0 flex items-center justify-center text-gray-500">
+                            <i class="fas fa-image text-4xl"></i>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-emas text-white text-xs font-bold px-3 py-1 rounded">Kegiatan</span>
+                    </div>
+                    <div class="p-5">
+                        <div class="text-xs text-gray-500 mb-2"><i class="far fa-calendar-alt mr-1"></i> 10 November 2026</div>
+                        <h3 class="font-bold text-lg mb-2 line-clamp-2">Simulasi E-Voting Pemilihan Ketua OSIS MTs & MA Darul Hikmah</h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">Dalam rangka pengenalan demokrasi digital, para santri antusias mengikuti simulasi e-voting berbasis web...</p>
+                        <a href="#" class="text-pesantren-600 font-medium text-sm">Baca selengkapnya &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Artikel 3 -->
+                <div class="bg-white rounded-lg overflow-hidden shadow border border-gray-200">
+                    <div class="h-48 bg-gray-300 relative">
+                        <div class="absolute inset-0 flex items-center justify-center text-gray-500">
+                            <i class="fas fa-image text-4xl"></i>
+                        </div>
+                        <span class="absolute top-4 left-4 bg-pesantren-600 text-white text-xs font-bold px-3 py-1 rounded">Prestasi</span>
+                    </div>
+                    <div class="p-5">
+                        <div class="text-xs text-gray-500 mb-2"><i class="far fa-calendar-alt mr-1"></i> 22 Oktober 2026</div>
+                        <h3 class="font-bold text-lg mb-2 line-clamp-2">Peringatan Hari Santri Nasional 2026 Berlangsung Khidmat</h3>
+                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">Seluruh elemen Yayasan Riyadul Hikmah Mekarrahayu menggelar upacara dan berbagai perlombaan khazanah Islam...</p>
+                        <a href="#" class="text-pesantren-600 font-medium text-sm">Baca selengkapnya &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-pesantren-900 text-gray-300 py-10 border-t-4 border-emas">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <h3 class="text-white text-xl font-bold mb-4">Yayasan Riyadul Hikmah Mekarrahayu</h3>
+                <p class="text-sm leading-relaxed mb-4">Menaungi Pondok Pesantren Riyadul Hikmah, PAUD Kober Al-Hasani, MTs Darul Hikmah, dan MA Darul Hikmah.</p>
+                <div class="flex space-x-4">
+                    <a href="#" class="w-8 h-8 rounded bg-pesantren-800 flex items-center justify-center hover:bg-emas text-white transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-8 h-8 rounded bg-pesantren-800 flex items-center justify-center hover:bg-emas text-white transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-8 h-8 rounded bg-pesantren-800 flex items-center justify-center hover:bg-emas text-white transition"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-white text-lg font-bold mb-4">Tautan Cepat</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-emas transition"><i class="fas fa-chevron-right text-xs mr-2 text-pesantren-500"></i> Profil Yayasan</a></li>
+                    <li><a href="#" class="hover:text-emas transition"><i class="fas fa-chevron-right text-xs mr-2 text-pesantren-500"></i> Informasi Pendaftaran (PPDB)</a></li>
+                    <li><a href="#" class="hover:text-emas transition"><i class="fas fa-chevron-right text-xs mr-2 text-pesantren-500"></i> Portal Login Admin & Guru</a></li>
+                    <li><a href="#" class="hover:text-emas transition"><i class="fas fa-chevron-right text-xs mr-2 text-pesantren-500"></i> Sistem E-Voting Santri</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white text-lg font-bold mb-4">Hubungi Kami</h3>
+                <ul class="space-y-3 text-sm">
+                    <li class="flex items-start">
+                        <i class="fas fa-map-marker-alt mt-1 mr-3 text-emas"></i>
+                        <span>[Alamat Lengkap Pesantren/Yayasan], Kab. Tasikmalaya, Jawa Barat</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-phone-alt mr-3 text-emas"></i>
+                        <span>(0265) XXXXXXX</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fas fa-envelope mr-3 text-emas"></i>
+                        <span>info@riyadulhikmah.ponpes.id</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 pt-6 border-t border-pesantren-800 text-sm text-center">
+            <p>&copy; 2026 Yayasan Riyadul Hikmah Mekarrahayu. Sistem Informasi Manajemen Pesantren.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

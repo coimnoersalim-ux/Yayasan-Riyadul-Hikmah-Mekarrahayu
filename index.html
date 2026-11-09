@@ -85,44 +85,68 @@
         </div>
     </header>
 
-    <!-- Unit Pendidikan (Lembaga) Section -->
+   <!-- Unit Pendidikan & Kepesantrenan Section -->
     <section id="lembaga" class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800">Unit Pendidikan</h2>
+                <h2 class="text-3xl font-bold text-gray-800">Lembaga & Unit Pendidikan</h2>
                 <div class="w-24 h-1 bg-emas mx-auto mt-4 rounded"></div>
-                <p class="mt-4 text-gray-600">Sistem pendidikan terpadu dari usia dini hingga menengah atas.</p>
+                <p class="mt-4 text-gray-600">Terintegrasi dalam satu kawasan di bawah naungan Yayasan Riyadul Hikmah Mekarrahayu.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Pesantren: Hero Card (Lebih Menonjol) -->
+            <div class="bg-pesantren-800 rounded-2xl shadow-xl overflow-hidden mb-10 flex flex-col md:flex-row transform transition hover:shadow-2xl">
+                <div class="md:w-1/3 bg-pesantren-900 p-8 flex flex-col justify-center items-center text-center border-b-4 md:border-b-0 md:border-r-4 border-emas">
+                    <i class="fas fa-mosque text-6xl text-emas mb-4"></i>
+                    <h3 class="text-2xl font-extrabold text-white tracking-wide">PONDOK PESANTREN</h3>
+                    <span class="text-pesantren-100 font-medium mt-1">Riyadul Hikmah</span>
+                </div>
+                <div class="md:w-2/3 p-8 flex flex-col justify-center relative">
+                    <!-- Watermark Icon Background -->
+                    <i class="fas fa-book-open absolute right-5 bottom-5 text-8xl text-pesantren-700 opacity-20 pointer-events-none"></i>
+                    
+                    <h4 class="text-xl font-bold text-emas mb-3">Pusat Kajian Islam & Pembentukan Karakter</h4>
+                    <p class="text-gray-200 mb-6 leading-relaxed">
+                        Pondok Pesantren Riyadul Hikmah adalah pilar utama pendidikan kami. Berfokus pada pendidikan salafiyah, tahfidzul Qur'an, kajian kitab kuning, dan amaliah ahlussunnah wal jama'ah untuk mencetak kader ulama yang berakhlakul karimah.
+                    </p>
+                    <div>
+                        <a href="#" class="inline-block bg-emas hover:bg-yellow-600 text-white font-bold py-2.5 px-6 rounded-lg transition shadow-md">
+                            Jelajahi Program Pesantren <i class="fas fa-arrow-right text-sm ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formal Schools: Grid 3 Kolom -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
                 <!-- PAUD -->
-                <div class="bg-slate-50 rounded-xl border border-gray-100 p-8 shadow-sm hover:shadow-xl transition flex flex-col items-center text-center group">
-                    <div class="w-16 h-16 bg-pesantren-100 text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">
+                <div class="bg-slate-50 rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md hover:border-emas transition flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-white text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100 group-hover:bg-emas group-hover:text-white transition">
                         <i class="fas fa-child"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">PAUD Kober Al-Hasani</h3>
-                    <p class="text-gray-600 mb-6 text-sm">Pendidikan usia dini yang berfokus pada pembentukan karakter Islami, kreativitas, dan kemandirian anak.</p>
-                    <a href="#" class="mt-auto text-pesantren-600 font-semibold hover:text-pesantren-800">Lihat Profil <i class="fas fa-arrow-right text-xs ml-1"></i></a>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">PAUD Kober Al-Hasani</h3>
+                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">Pendidikan usia dini yang berfokus pada pembentukan karakter Islami, kreativitas, dan kemandirian anak secara menyenangkan.</p>
+                    <a href="#" class="mt-auto text-pesantren-600 font-semibold text-sm hover:text-emas transition">Profil PAUD &rarr;</a>
                 </div>
 
                 <!-- MTs -->
-                <div class="bg-slate-50 rounded-xl border border-gray-100 p-8 shadow-sm hover:shadow-xl transition flex flex-col items-center text-center group">
-                    <div class="w-16 h-16 bg-pesantren-100 text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">
+                <div class="bg-slate-50 rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md hover:border-emas transition flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-white text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100 group-hover:bg-emas group-hover:text-white transition">
                         <i class="fas fa-book-reader"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">MTs Darul Hikmah</h3>
-                    <p class="text-gray-600 mb-6 text-sm">Madrasah Tsanawiyah dengan kurikulum terpadu antara ilmu agama (kepesantrenan) dan ilmu pengetahuan umum.</p>
-                    <a href="#" class="mt-auto text-pesantren-600 font-semibold hover:text-pesantren-800">Lihat Profil <i class="fas fa-arrow-right text-xs ml-1"></i></a>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">MTs Darul Hikmah</h3>
+                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">Madrasah Tsanawiyah terakreditasi dengan kurikulum terpadu yang memadukan ilmu kepesantrenan dan ilmu pengetahuan umum.</p>
+                    <a href="#" class="mt-auto text-pesantren-600 font-semibold text-sm hover:text-emas transition">Profil MTs &rarr;</a>
                 </div>
 
                 <!-- MA -->
-                <div class="bg-slate-50 rounded-xl border border-gray-100 p-8 shadow-sm hover:shadow-xl transition flex flex-col items-center text-center group">
-                    <div class="w-16 h-16 bg-pesantren-100 text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition">
+                <div class="bg-slate-50 rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md hover:border-emas transition flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-white text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100 group-hover:bg-emas group-hover:text-white transition">
                         <i class="fas fa-user-graduate"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-3">MA Darul Hikmah</h3>
-                    <p class="text-gray-600 mb-6 text-sm">Madrasah Aliyah yang membekali santri dengan pemahaman kitab kuning, sains, dan kesiapan melanjutkan pendidikan tinggi.</p>
-                    <a href="#" class="mt-auto text-pesantren-600 font-semibold hover:text-pesantren-800">Lihat Profil <i class="fas fa-arrow-right text-xs ml-1"></i></a>
+                    <h3 class="text-lg font-bold text-gray-800 mb-2">MA Darul Hikmah</h3>
+                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">Madrasah Aliyah yang membekali santri dengan penguatan literasi sains, kesiapan jenjang tinggi, dan kecakapan hidup.</p>
+                    <a href="#" class="mt-auto text-pesantren-600 font-semibold text-sm hover:text-emas transition">Profil MA &rarr;</a>
                 </div>
             </div>
         </div>

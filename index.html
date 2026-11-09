@@ -46,7 +46,6 @@
                     <a href="#" class="hover:text-emas transition">Beranda</a>
                     <a href="#lembaga" class="hover:text-emas transition">Lembaga</a>
                     <a href="#berita" class="hover:text-emas transition">Berita</a>
-                    <a href="#admin" class="hover:text-emas transition">Admin</a>
                     <a href="#" class="bg-emas hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition shadow-md">Portal Login</a>
                 </div>
                 <div class="md:hidden flex items-center">
@@ -162,49 +161,6 @@
         </div>
     </section>
 
-    <!-- Admin Panel: Tambah Berita (Bisa diisi dari website) -->
-    <section id="admin" class="py-12 bg-white border-t border-gray-200">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-slate-50 p-8 rounded-xl shadow-md border border-gray-200">
-                <h3 class="text-2xl font-bold text-pesantren-900 mb-6 border-b-2 border-emas pb-2">
-                    <i class="fas fa-edit mr-2"></i>Tulis Berita Baru
-                </h3>
-                <form id="form-tambah-berita" class="space-y-4">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Tanggal</label>
-                            <input type="date" id="input-tanggal" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pesantren-500 focus:border-pesantren-500">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
-                            <select id="input-kategori" required class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pesantren-500 focus:border-pesantren-500">
-                                <option value="Pengumuman">Pengumuman</option>
-                                <option value="Kegiatan">Kegiatan</option>
-                                <option value="Prestasi">Prestasi</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Judul Berita</label>
-                        <input type="text" id="input-judul" required placeholder="Contoh: Juara 1 Lomba Pidato" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pesantren-500 focus:border-pesantren-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">URL Gambar (Opsional)</label>
-                        <input type="url" id="input-gambar" placeholder="https://via.placeholder.com/400x250" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pesantren-500 focus:border-pesantren-500">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Isi Berita</label>
-                        <textarea id="input-isi" required rows="4" placeholder="Tulis rincian berita di sini..." class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-pesantren-500 focus:border-pesantren-500"></textarea>
-                    </div>
-                    <button type="submit" id="btn-submit" class="w-full bg-pesantren-800 hover:bg-pesantren-900 text-white font-bold py-3 px-4 rounded-md transition shadow-md">
-                        <i class="fas fa-paper-plane mr-2"></i> Terbitkan Berita
-                    </button>
-                    <div id="pesan-status" class="hidden text-center font-medium mt-3 text-sm"></div>
-                </form>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="bg-pesantren-900 text-gray-300 py-10 border-t-4 border-emas">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -248,18 +204,16 @@
         </div>
     </footer>
 
-    <!-- SCRIPT UTAMA UNTUK MENGAMBIL DAN MENGIRIM DATA KE GOOGLE SHEETS -->
+    <!-- SCRIPT UTAMA UNTUK MENGAMBIL BERITA DARI GOOGLE SHEETS -->
     <script>
-        // --- MASUKKAN URL API ANDA DI SINI ---
+        // API URL Anda yang sudah dites dan berfungsi
         const API_URL = 'https://script.google.com/macros/s/AKfycbwXZK002PumCpPTOnd7ik8zPmSS_OumEYa3QBPd3NWtwaNdtarFLdN7ISAf6lc2GuIC/exec'; 
 
-        // 1. Fungsi Mengambil Berita dari Spreadsheet (GET)
         async function muatBerita() {
             const wadah = document.getElementById('wadah-berita');
-            wadah.innerHTML = '<div class="col-span-full text-center text-gray-500 py-10">Memuat berita pesantren...</div>';
-
+            
             try {
-                // Fetch dengan parameter ?t= untuk memaksa browser mengambil data terbaru (tanpa cache)
+                // Fetch dengan parameter waktu untuk mencegah cache
                 const response = await fetch(API_URL + '?t=' + new Date().getTime());
                 
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -267,7 +221,7 @@
                 
                 if (json.status === 'success' && json.data.length > 0) {
                     wadah.innerHTML = ''; 
-                    const beritaTerbaru = json.data.slice(0, 3); // Hanya 3 berita terbaru
+                    const beritaTerbaru = json.data.slice(0, 3); // Ambil 3 berita terbaru
                     
                     beritaTerbaru.forEach(item => {
                         let warnaLabel = 'bg-pesantren-600';
@@ -302,60 +256,13 @@
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
-                wadah.innerHTML = `<div class="col-span-full text-center text-red-500 py-10">Gagal memuat berita. Periksa API Anda.</div>`;
+                wadah.innerHTML = `<div class="col-span-full text-center text-red-500 py-10">
+                    <p class="font-bold">Gagal memuat berita.</p>
+                </div>`;
             }
         }
 
-        // 2. Fungsi Menyimpan Berita Baru ke Spreadsheet (POST)
-        document.getElementById('form-tambah-berita').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const btnSubmit = document.getElementById('btn-submit');
-            const pesanStatus = document.getElementById('pesan-status');
-            
-            const dataBaru = {
-                Tanggal: document.getElementById('input-tanggal').value,
-                Kategori: document.getElementById('input-kategori').value,
-                Judul: document.getElementById('input-judul').value,
-                URL_Gambar: document.getElementById('input-gambar').value || 'https://via.placeholder.com/400x250?text=RH',
-                Isi_Berita: document.getElementById('input-isi').value
-            };
-
-            btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Sedang Menyimpan...';
-            btnSubmit.disabled = true;
-            pesanStatus.classList.add('hidden');
-
-            try {
-                // Kirim data ke API (Google Apps Script POST request)
-                const response = await fetch(API_URL, {
-                    method: 'POST',
-                    body: JSON.stringify(dataBaru)
-                });
-                
-                const result = await response.json();
-                
-                if (result.status === 'success') {
-                    pesanStatus.textContent = 'Berhasil! Berita sudah ditambahkan.';
-                    pesanStatus.className = 'text-center font-medium mt-3 text-green-600';
-                    this.reset(); // Kosongkan input form
-                    muatBerita(); // Refresh area berita di atas agar langsung muncul
-                } else {
-                    throw new Error(result.message);
-                }
-            } catch (error) {
-                pesanStatus.textContent = 'Gagal menyimpan data: ' + error.message;
-                pesanStatus.className = 'text-center font-medium mt-3 text-red-600';
-            } finally {
-                btnSubmit.innerHTML = '<i class="fas fa-paper-plane mr-2"></i> Terbitkan Berita';
-                btnSubmit.disabled = false;
-                pesanStatus.classList.remove('hidden');
-                
-                // Hilangkan pesan sukses setelah 5 detik
-                setTimeout(() => pesanStatus.classList.add('hidden'), 5000);
-            }
-        });
-
-        // 3. Panggil fungsi saat web pertama kali dibuka
+        // Panggil fungsi saat web pertama kali dibuka
         document.addEventListener('DOMContentLoaded', muatBerita);
     </script>
 </body>

@@ -163,55 +163,9 @@
                 <a href="#" class="text-pesantren-600 font-medium hover:underline hidden sm:block">Lihat Semua Berita</a>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Artikel 1 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow border border-gray-200">
-                    <div class="h-48 bg-gray-300 relative">
-                        <!-- Placeholder Image -->
-                        <div class="absolute inset-0 flex items-center justify-center text-gray-500">
-                            <i class="fas fa-image text-4xl"></i>
-                        </div>
-                        <span class="absolute top-4 left-4 bg-pesantren-600 text-white text-xs font-bold px-3 py-1 rounded">Pengumuman</span>
-                    </div>
-                    <div class="p-5">
-                        <div class="text-xs text-gray-500 mb-2"><i class="far fa-calendar-alt mr-1"></i> 15 November 2026</div>
-                        <h3 class="font-bold text-lg mb-2 line-clamp-2">Pembukaan Pendaftaran Santri Baru (PPDB) Tahun Ajaran 2027/2028</h3>
-                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">Yayasan Riyadul Hikmah Mekarrahayu resmi membuka pendaftaran untuk unit PAUD, MTs, dan MA Darul Hikmah secara terpadu...</p>
-                        <a href="#" class="text-pesantren-600 font-medium text-sm">Baca selengkapnya &rarr;</a>
-                    </div>
-                </div>
-
-                <!-- Artikel 2 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow border border-gray-200">
-                    <div class="h-48 bg-gray-300 relative">
-                        <div class="absolute inset-0 flex items-center justify-center text-gray-500">
-                            <i class="fas fa-image text-4xl"></i>
-                        </div>
-                        <span class="absolute top-4 left-4 bg-emas text-white text-xs font-bold px-3 py-1 rounded">Kegiatan</span>
-                    </div>
-                    <div class="p-5">
-                        <div class="text-xs text-gray-500 mb-2"><i class="far fa-calendar-alt mr-1"></i> 10 November 2026</div>
-                        <h3 class="font-bold text-lg mb-2 line-clamp-2">Simulasi E-Voting Pemilihan Ketua OSIS MTs & MA Darul Hikmah</h3>
-                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">Dalam rangka pengenalan demokrasi digital, para santri antusias mengikuti simulasi e-voting berbasis web...</p>
-                        <a href="#" class="text-pesantren-600 font-medium text-sm">Baca selengkapnya &rarr;</a>
-                    </div>
-                </div>
-
-                <!-- Artikel 3 -->
-                <div class="bg-white rounded-lg overflow-hidden shadow border border-gray-200">
-                    <div class="h-48 bg-gray-300 relative">
-                        <div class="absolute inset-0 flex items-center justify-center text-gray-500">
-                            <i class="fas fa-image text-4xl"></i>
-                        </div>
-                        <span class="absolute top-4 left-4 bg-pesantren-600 text-white text-xs font-bold px-3 py-1 rounded">Prestasi</span>
-                    </div>
-                    <div class="p-5">
-                        <div class="text-xs text-gray-500 mb-2"><i class="far fa-calendar-alt mr-1"></i> 22 Oktober 2026</div>
-                        <h3 class="font-bold text-lg mb-2 line-clamp-2">Peringatan Hari Santri Nasional 2026 Berlangsung Khidmat</h3>
-                        <p class="text-gray-600 text-sm line-clamp-3 mb-4">Seluruh elemen Yayasan Riyadul Hikmah Mekarrahayu menggelar upacara dan berbagai perlombaan khazanah Islam...</p>
-                        <a href="#" class="text-pesantren-600 font-medium text-sm">Baca selengkapnya &rarr;</a>
-                    </div>
-                </div>
+            <div id="wadah-berita" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Konten akan dimuat oleh JavaScript -->
+                <div class="col-span-full text-center text-gray-500 py-10">Memuat berita pesantren...</div>
             </div>
         </div>
     </section>
@@ -260,5 +214,90 @@
         </div>
     </footer>
 
+    <script>
+        // Data statis sebagai fallback jika URL Apps Script belum diatur
+        const dataBeritaStatis = [
+            {
+                ID: 1,
+                Tanggal: "2026-11-15",
+                Kategori: "Pengumuman",
+                Judul: "Pembukaan Pendaftaran Santri Baru (PPDB) Tahun Ajaran 2027/2028",
+                Isi_Berita: "Yayasan Riyadul Hikmah Mekarrahayu resmi membuka pendaftaran untuk unit PAUD, MTs, dan MA Darul Hikmah secara terpadu.",
+                URL_Gambar: "https://via.placeholder.com/400x250?text=Pengumuman"
+            },
+            {
+                ID: 2,
+                Tanggal: "2026-11-10",
+                Kategori: "Kegiatan",
+                Judul: "Simulasi E-Voting Pemilihan Ketua OSIS MTs & MA Darul Hikmah",
+                Isi_Berita: "Dalam rangka pengenalan demokrasi digital, para santri antusias mengikuti simulasi e-voting berbasis web.",
+                URL_Gambar: "https://via.placeholder.com/400x250?text=Kegiatan"
+            },
+            {
+                ID: 3,
+                Tanggal: "2026-10-22",
+                Kategori: "Prestasi",
+                Judul: "Peringatan Hari Santri Nasional 2026 Berlangsung Khidmat",
+                Isi_Berita: "Seluruh elemen Yayasan Riyadul Hikmah Mekarrahayu menggelar upacara dan berbagai perlombaan khazanah Islam.",
+                URL_Gambar: "https://via.placeholder.com/400x250?text=Prestasi"
+            }
+        ];
+
+        // --- GANTI URL INI DENGAN URL WEB APP GOOGLE APPS SCRIPT ANDA LALU HAPUS TANDA KUTIP DUA KALI ---
+        // Contoh: const API_URL = 'https://script.google.com/macros/s/AKfycb.../exec';
+        const API_URL = 'URL_GAS_ANDA'; 
+
+        async function muatBerita() {
+            const wadah = document.getElementById('wadah-berita');
+            try {
+                let dataBerita = dataBeritaStatis;
+                
+                // Coba ambil data dari API jika URL sudah diset
+                if (API_URL !== 'https://script.google.com/macros/s/AKfycbzwiJ0dC-zfX0sokExsX1eH1UBsrDPa-jvEfUuICwMz6tXyi4JgHzNYM2izi4jougRZ/exec') {
+                     const response = await fetch(API_URL);
+                     const json = await response.json();
+                     if (json.status === 'success') {
+                         dataBerita = json.data;
+                     }
+                }
+                
+                if (dataBerita && dataBerita.length > 0) {
+                    wadah.innerHTML = ''; 
+                    const beritaTerbaru = dataBerita.slice(0, 3);
+                    
+                    beritaTerbaru.forEach(item => {
+                        let warnaLabel = 'bg-pesantren-600';
+                        if(item.Kategori === 'Kegiatan') warnaLabel = 'bg-emas';
+                        if(item.Kategori === 'Prestasi') warnaLabel = 'bg-blue-600';
+
+                        const card = `
+                        <div class="bg-white rounded-lg overflow-hidden shadow border border-gray-200 flex flex-col h-full">
+                            <div class="h-48 bg-gray-200 relative overflow-hidden">
+                                <img src="${item.URL_Gambar}" alt="${item.Judul}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x250?text=RH'">
+                                <span class="absolute top-4 left-4 ${warnaLabel} text-white text-xs font-bold px-3 py-1 rounded shadow-sm">${item.Kategori}</span>
+                            </div>
+                            <div class="p-5 flex flex-col flex-grow">
+                                <div class="text-xs text-gray-500 mb-2">
+                                    <i class="far fa-calendar-alt mr-1"></i> ${new Date(item.Tanggal).toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric'})}
+                                </div>
+                                <h3 class="font-bold text-lg mb-2 line-clamp-2 text-gray-800">${item.Judul}</h3>
+                                <p class="text-gray-600 text-sm line-clamp-3 mb-4">${item.Isi_Berita}</p>
+                                <a href="#" class="mt-auto text-pesantren-600 font-medium text-sm hover:text-emas transition">Baca selengkapnya &rarr;</a>
+                            </div>
+                        </div>
+                        `;
+                        wadah.innerHTML += card;
+                    });
+                } else {
+                    wadah.innerHTML = '<div class="col-span-full text-center text-gray-500">Belum ada berita yang dipublikasikan.</div>';
+                }
+            } catch (error) {
+                console.error('Gagal memuat berita:', error);
+                wadah.innerHTML = '<div class="col-span-full text-center text-red-500">Gagal terhubung ke pusat informasi.</div>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', muatBerita);
+    </script>
 </body>
 </html>

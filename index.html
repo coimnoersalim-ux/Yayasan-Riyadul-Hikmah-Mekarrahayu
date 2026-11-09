@@ -254,7 +254,7 @@
                 
                 // Coba ambil data dari API jika URL sudah diset
                 if (API_URL !== 'URL_GAS_ANDA') {
-                     const response = await fetch(API_URL);
+                    const response = await fetch(API_URL + '?t=' + new Date().getTime());
                      const json = await response.json();
                      if (json.status === 'success') {
                          dataBerita = json.data;

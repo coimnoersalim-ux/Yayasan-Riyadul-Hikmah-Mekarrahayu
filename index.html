@@ -29,11 +29,11 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-    <!-- Navbar -->
+    <!-- NAVBAR 1 PINTU -->
     <nav class="bg-pesantren-800 text-white sticky top-0 z-50 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="tampilkanPublik()">
                     <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-pesantren-800 font-bold text-xl">
                         RH
                     </div>
@@ -42,227 +42,404 @@
                         <span class="text-xs text-pesantren-100">Yayasan Riyadul Hikmah Mekarrahayu</span>
                     </div>
                 </div>
-                <div class="hidden md:flex space-x-6 text-sm font-medium">
-                    <a href="#" class="hover:text-emas transition">Beranda</a>
+                
+                <!-- Menu Publik -->
+                <div id="menu-publik" class="hidden md:flex items-center space-x-6 text-sm font-medium">
                     <a href="#lembaga" class="hover:text-emas transition">Lembaga</a>
-                    <a href="#berita" class="hover:text-emas transition">Berita</a>
-                    <a href="#" class="bg-emas hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition shadow-md">Portal Login</a>
+                    <a href="#berita" class="hover:text-emas transition">Kabar Pesantren</a>
+                    <button onclick="bukaModalLogin()" class="bg-emas hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition shadow-md flex items-center">
+                        <i class="fas fa-lock mr-2"></i> Portal Login
+                    </button>
                 </div>
-                <div class="md:hidden flex items-center">
-                    <button class="text-white hover:text-emas focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
+
+                <!-- Menu Admin (Muncul setelah login) -->
+                <div id="menu-admin" class="hidden items-center space-x-6 text-sm font-medium">
+                    <span class="text-emas font-bold"><i class="fas fa-user-shield mr-1"></i> Mode Admin</span>
+                    <button onclick="tampilkanPublik()" class="hover:text-emas transition"><i class="fas fa-globe mr-1"></i> Lihat Web</button>
+                    <button onclick="logoutAdmin()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-md transition shadow-md">
+                        <i class="fas fa-sign-out-alt mr-1"></i> Keluar
                     </button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="relative bg-pesantren-900 text-white overflow-hidden">
-        <div class="absolute inset-0 opacity-20">
-            <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Masjid Background" class="w-full h-full object-cover">
-        </div>
-        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 flex flex-col items-center text-center">
-            <span class="text-emas font-semibold tracking-wider uppercase text-sm mb-4">Yayasan Riyadul Hikmah Mekarrahayu</span>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-md">
-                Pondok Pesantren <br> <span class="text-pesantren-100">Riyadul Hikmah</span>
-            </h1>
-            <p class="text-lg md:text-xl text-gray-200 max-w-2xl mb-10">
-                Mencetak generasi Islami yang unggul dalam ilmu pengetahuan, berakhlak mulia, dan mandiri untuk kemajuan bangsa dan agama.
-            </p>
-            <div class="flex flex-col sm:flex-row gap-4">
-                <a href="#" class="bg-emas hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition transform hover:-translate-y-1">
-                    Informasi PPDB 2027
-                </a>
-                <a href="#lembaga" class="bg-transparent border-2 border-white hover:bg-white hover:text-pesantren-900 text-white font-bold py-3 px-8 rounded-lg transition">
-                    Jelajahi Unit Pendidikan
-                </a>
+    <!-- ========================================== -->
+    <!-- TAMPILAN PUBLIK (Awalnya Muncul) -->
+    <!-- ========================================== -->
+    <div id="view-publik">
+        
+        <!-- Hero Section -->
+        <header class="relative bg-pesantren-900 text-white overflow-hidden">
+            <div class="absolute inset-0 opacity-20">
+                <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Masjid Background" class="w-full h-full object-cover">
             </div>
-        </div>
-    </header>
-
-    <!-- Unit Pendidikan & Kepesantrenan Section -->
-    <section id="lembaga" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800">Lembaga & Unit Pendidikan</h2>
-                <div class="w-24 h-1 bg-emas mx-auto mt-4 rounded"></div>
-                <p class="mt-4 text-gray-600">Terintegrasi dalam satu kawasan di bawah naungan Yayasan Riyadul Hikmah Mekarrahayu.</p>
-            </div>
-
-            <!-- Pesantren: Hero Card -->
-            <div class="bg-pesantren-800 rounded-2xl shadow-xl overflow-hidden mb-10 flex flex-col md:flex-row transform transition hover:shadow-2xl">
-                <div class="md:w-1/3 bg-pesantren-900 p-8 flex flex-col justify-center items-center text-center border-b-4 md:border-b-0 md:border-r-4 border-emas">
-                    <i class="fas fa-mosque text-6xl text-emas mb-4"></i>
-                    <h3 class="text-2xl font-extrabold text-white tracking-wide">PONDOK PESANTREN</h3>
-                    <span class="text-pesantren-100 font-medium mt-1">Riyadul Hikmah</span>
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 flex flex-col items-center text-center">
+                <span class="text-emas font-semibold tracking-wider uppercase text-sm mb-4">Yayasan Riyadul Hikmah Mekarrahayu</span>
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-md">
+                    Pondok Pesantren <br> <span class="text-pesantren-100">Riyadul Hikmah</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-200 max-w-2xl mb-10">
+                    Mencetak generasi Islami yang unggul dalam ilmu pengetahuan, berakhlak mulia, dan mandiri untuk kemajuan bangsa dan agama.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#" class="bg-emas hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition transform hover:-translate-y-1">
+                        Informasi PPDB 2027
+                    </a>
+                    <a href="#lembaga" class="bg-transparent border-2 border-white hover:bg-white hover:text-pesantren-900 text-white font-bold py-3 px-8 rounded-lg transition">
+                        Jelajahi Unit Pendidikan
+                    </a>
                 </div>
-                <div class="md:w-2/3 p-8 flex flex-col justify-center relative">
-                    <i class="fas fa-book-open absolute right-5 bottom-5 text-8xl text-pesantren-700 opacity-20 pointer-events-none"></i>
-                    <h4 class="text-xl font-bold text-emas mb-3">Pusat Kajian Islam & Pembentukan Karakter</h4>
-                    <p class="text-gray-200 mb-6 leading-relaxed">
-                        Pondok Pesantren Riyadul Hikmah adalah pilar utama pendidikan kami. Berfokus pada pendidikan salafiyah, tahfidzul Qur'an, kajian kitab kuning, dan amaliah ahlussunnah wal jama'ah untuk mencetak kader ulama yang berakhlakul karimah.
-                    </p>
+            </div>
+        </header>
+
+        <!-- Unit Pendidikan -->
+        <section id="lembaga" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-gray-800">Lembaga & Unit Pendidikan</h2>
+                    <div class="w-24 h-1 bg-emas mx-auto mt-4 rounded"></div>
+                    <p class="mt-4 text-gray-600">Terintegrasi dalam satu kawasan di bawah naungan Yayasan Riyadul Hikmah Mekarrahayu.</p>
+                </div>
+
+                <!-- Pesantren Hero Card -->
+                <div class="bg-pesantren-800 rounded-2xl shadow-xl overflow-hidden mb-10 flex flex-col md:flex-row transform transition hover:shadow-2xl">
+                    <div class="md:w-1/3 bg-pesantren-900 p-8 flex flex-col justify-center items-center text-center border-b-4 md:border-b-0 md:border-r-4 border-emas">
+                        <i class="fas fa-mosque text-6xl text-emas mb-4"></i>
+                        <h3 class="text-2xl font-extrabold text-white tracking-wide">PONDOK PESANTREN</h3>
+                        <span class="text-pesantren-100 font-medium mt-1">Riyadul Hikmah</span>
+                    </div>
+                    <div class="md:w-2/3 p-8 flex flex-col justify-center relative">
+                        <i class="fas fa-book-open absolute right-5 bottom-5 text-8xl text-pesantren-700 opacity-20 pointer-events-none"></i>
+                        <h4 class="text-xl font-bold text-emas mb-3">Pusat Kajian Islam & Pembentukan Karakter</h4>
+                        <p class="text-gray-200 mb-6 leading-relaxed">
+                            Pondok Pesantren Riyadul Hikmah adalah pilar utama pendidikan kami. Berfokus pada pendidikan salafiyah, tahfidzul Qur'an, kajian kitab kuning, dan amaliah ahlussunnah wal jama'ah untuk mencetak kader ulama yang berakhlakul karimah.
+                        </p>
+                        <div>
+                            <a href="#" class="inline-block bg-emas hover:bg-yellow-600 text-white font-bold py-2.5 px-6 rounded-lg transition shadow-md">
+                                Jelajahi Program Pesantren <i class="fas fa-arrow-right text-sm ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sekolah Formal -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                    <div class="bg-slate-50 rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md hover:border-emas transition flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-white text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">PAUD Kober Al-Hasani</h3>
+                        <p class="text-gray-600 mb-6 text-sm leading-relaxed">Pendidikan usia dini yang berfokus pada pembentukan karakter Islami, kreativitas, dan kemandirian anak.</p>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md hover:border-emas transition flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-white text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100">
+                            <i class="fas fa-book-reader"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">MTs Darul Hikmah</h3>
+                        <p class="text-gray-600 mb-6 text-sm leading-relaxed">Madrasah Tsanawiyah terakreditasi dengan kurikulum terpadu ilmu kepesantrenan dan pengetahuan umum.</p>
+                    </div>
+
+                    <div class="bg-slate-50 rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md hover:border-emas transition flex flex-col items-center text-center">
+                        <div class="w-16 h-16 bg-white text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 mb-2">MA Darul Hikmah</h3>
+                        <p class="text-gray-600 mb-6 text-sm leading-relaxed">Madrasah Aliyah yang membekali santri dengan penguatan literasi sains dan kecakapan hidup.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Berita & Informasi -->
+        <section id="berita" class="py-16 bg-slate-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-end mb-10">
                     <div>
-                        <a href="#" class="inline-block bg-emas hover:bg-yellow-600 text-white font-bold py-2.5 px-6 rounded-lg transition shadow-md">
-                            Jelajahi Program Pesantren <i class="fas fa-arrow-right text-sm ml-2"></i>
-                        </a>
+                        <h2 class="text-3xl font-bold text-gray-800">Kabar Pesantren</h2>
+                        <div class="w-24 h-1 bg-emas mt-3 rounded"></div>
                     </div>
+                </div>
+                
+                <!-- WADAH BERITA DARI SPREADSHEET -->
+                <div id="wadah-berita" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="col-span-full text-center text-gray-500 py-10">Memuat berita pesantren...</div>
                 </div>
             </div>
-
-            <!-- Formal Schools -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                <!-- PAUD -->
-                <div class="bg-slate-50 rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md hover:border-emas transition flex flex-col items-center text-center group">
-                    <div class="w-16 h-16 bg-white text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100 group-hover:bg-emas group-hover:text-white transition">
-                        <i class="fas fa-child"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 mb-2">PAUD Kober Al-Hasani</h3>
-                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">Pendidikan usia dini yang berfokus pada pembentukan karakter Islami, kreativitas, dan kemandirian anak secara menyenangkan.</p>
-                </div>
-
-                <!-- MTs -->
-                <div class="bg-slate-50 rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md hover:border-emas transition flex flex-col items-center text-center group">
-                    <div class="w-16 h-16 bg-white text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100 group-hover:bg-emas group-hover:text-white transition">
-                        <i class="fas fa-book-reader"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 mb-2">MTs Darul Hikmah</h3>
-                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">Madrasah Tsanawiyah terakreditasi dengan kurikulum terpadu yang memadukan ilmu kepesantrenan dan ilmu pengetahuan umum.</p>
-                </div>
-
-                <!-- MA -->
-                <div class="bg-slate-50 rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md hover:border-emas transition flex flex-col items-center text-center group">
-                    <div class="w-16 h-16 bg-white text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100 group-hover:bg-emas group-hover:text-white transition">
-                        <i class="fas fa-user-graduate"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-gray-800 mb-2">MA Darul Hikmah</h3>
-                    <p class="text-gray-600 mb-6 text-sm leading-relaxed">Madrasah Aliyah yang membekali santri dengan penguatan literasi sains, kesiapan jenjang tinggi, dan kecakapan hidup.</p>
-                </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="bg-pesantren-900 text-gray-300 py-10 border-t-4 border-emas">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <p>&copy; 2026 Yayasan Riyadul Hikmah Mekarrahayu. Sistem Informasi Manajemen Pesantren.</p>
             </div>
-        </div>
-    </section>
+        </footer>
+    </div>
 
-    <!-- Berita & Informasi Section -->
-    <section id="berita" class="py-16 bg-slate-100">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-end mb-10">
+
+    <!-- ========================================== -->
+    <!-- TAMPILAN ADMIN (Awalnya Sembunyi) -->
+    <!-- ========================================== -->
+    <div id="view-admin" class="hidden min-h-screen bg-slate-100 p-4 sm:p-8">
+        <div class="max-w-4xl mx-auto">
+            <div class="mb-8 flex justify-between items-center">
                 <div>
-                    <h2 class="text-3xl font-bold text-gray-800">Kabar Pesantren</h2>
-                    <div class="w-24 h-1 bg-emas mt-3 rounded"></div>
+                    <h1 class="text-3xl font-bold text-gray-800">Dashboard Portal Berita</h1>
+                    <p class="text-gray-600 mt-1">Formulir pengisian berita langsung ke Database Google Sheets.</p>
                 </div>
-                <a href="#" class="text-pesantren-600 font-medium hover:underline hidden sm:block">Lihat Semua Berita</a>
+                <button onclick="muatBerita(); tampilkanPublik();" class="text-pesantren-600 font-bold hover:text-pesantren-800">
+                    <i class="fas fa-arrow-left mr-1"></i> Kembali ke Web
+                </button>
             </div>
 
-            <!-- Area Grid Berita -->
-            <div id="wadah-berita" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="col-span-full text-center text-gray-500 py-10">Memuat berita pesantren...</div>
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-100 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pesantren-600 to-emas"></div>
+                
+                <form id="form-tambah-berita" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Tanggal Publikasi</label>
+                            <input type="date" id="input-tanggal" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pesantren-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">Kategori Berita</label>
+                            <select id="input-kategori" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pesantren-500">
+                                <option value="Pengumuman">Pengumuman</option>
+                                <option value="Kegiatan">Kegiatan</option>
+                                <option value="Prestasi">Prestasi</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Judul Kabar / Berita</label>
+                        <input type="text" id="input-judul" required placeholder="Contoh: Penerimaan Santri Baru (PPDB) Resmi Dibuka" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pesantren-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">URL / Link Gambar (Opsional)</label>
+                        <input type="url" id="input-gambar" placeholder="https://contoh.com/gambar.jpg" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pesantren-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Isi Berita Lengkap</label>
+                        <textarea id="input-isi" required rows="6" placeholder="Tulis isi berita di sini..." class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pesantren-500"></textarea>
+                    </div>
+
+                    <div id="pesan-status" class="hidden p-4 rounded-lg text-center font-bold mb-4"></div>
+
+                    <button type="submit" id="btn-submit" class="w-full bg-pesantren-700 hover:bg-pesantren-800 text-white font-bold py-4 px-4 rounded-xl transition shadow-lg flex justify-center items-center text-lg">
+                        <i class="fas fa-paper-plane mr-2"></i> Terbitkan Berita ke Database
+                    </button>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- Footer -->
-    <footer class="bg-pesantren-900 text-gray-300 py-10 border-t-4 border-emas">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <h3 class="text-white text-xl font-bold mb-4">Yayasan Riyadul Hikmah Mekarrahayu</h3>
-                <p class="text-sm leading-relaxed mb-4">Menaungi Pondok Pesantren Riyadul Hikmah, PAUD Kober Al-Hasani, MTs Darul Hikmah, dan MA Darul Hikmah.</p>
-                <div class="flex space-x-4">
-                    <a href="#" class="w-8 h-8 rounded bg-pesantren-800 flex items-center justify-center hover:bg-emas text-white transition"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="w-8 h-8 rounded bg-pesantren-800 flex items-center justify-center hover:bg-emas text-white transition"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="w-8 h-8 rounded bg-pesantren-800 flex items-center justify-center hover:bg-emas text-white transition"><i class="fab fa-youtube"></i></a>
+
+    <!-- ========================================== -->
+    <!-- MODAL POP-UP LOGIN -->
+    <!-- ========================================== -->
+    <div id="modal-login" class="hidden fixed inset-0 bg-black bg-opacity-60 z-[60] flex items-center justify-center p-4">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-sm relative transform scale-95 transition-transform duration-300 border-t-4 border-emas">
+            <button onclick="tutupModalLogin()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-xl"><i class="fas fa-times"></i></button>
+            
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-pesantren-800 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-3">RH</div>
+                <h3 class="text-xl font-bold text-gray-800">Login Administrator</h3>
+            </div>
+            
+            <form id="form-login" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Username</label>
+                    <input type="text" id="username" required class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-pesantren-500 outline-none">
                 </div>
-            </div>
-            <div>
-                <h3 class="text-white text-lg font-bold mb-4">Tautan Cepat</h3>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-emas transition"><i class="fas fa-chevron-right text-xs mr-2 text-pesantren-500"></i> Profil Yayasan</a></li>
-                    <li><a href="#" class="hover:text-emas transition"><i class="fas fa-chevron-right text-xs mr-2 text-pesantren-500"></i> Informasi Pendaftaran (PPDB)</a></li>
-                    <li><a href="#" class="hover:text-emas transition"><i class="fas fa-chevron-right text-xs mr-2 text-pesantren-500"></i> Sistem E-Voting Santri</a></li>
-                </ul>
-            </div>
-            <div>
-                <h3 class="text-white text-lg font-bold mb-4">Hubungi Kami</h3>
-                <ul class="space-y-3 text-sm">
-                    <li class="flex items-start">
-                        <i class="fas fa-map-marker-alt mt-1 mr-3 text-emas"></i>
-                        <span>[Alamat Lengkap Pesantren/Yayasan], Kab. Tasikmalaya, Jawa Barat</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-phone-alt mr-3 text-emas"></i>
-                        <span>(0265) XXXXXXX</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-envelope mr-3 text-emas"></i>
-                        <span>info@riyadulhikmah.ponpes.id</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 pt-6 border-t border-pesantren-800 text-sm text-center">
-            <p>&copy; 2026 Yayasan Riyadul Hikmah Mekarrahayu. Sistem Informasi Manajemen Pesantren.</p>
-        </div>
-    </footer>
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">Password</label>
+                    <input type="password" id="password" required class="w-full px-4 py-2 border border-gray-300 rounded-lg bg-gray-50 focus:ring-2 focus:ring-pesantren-500 outline-none">
+                </div>
+                
+                <div id="pesan-login" class="hidden text-red-500 text-xs font-bold text-center bg-red-50 p-2 rounded">
+                    Username atau password salah!
+                </div>
 
-    <!-- SCRIPT UTAMA UNTUK MENGAMBIL BERITA DARI GOOGLE SHEETS -->
+                <button type="submit" class="w-full bg-pesantren-800 hover:bg-pesantren-900 text-white font-bold py-2.5 px-4 rounded-lg transition flex items-center justify-center mt-2">
+                    <i class="fas fa-sign-in-alt mr-2"></i> Masuk
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- JAVASCRIPT SYSTEM (1 PINTU) -->
+    <!-- ========================================== -->
     <script>
-        // API URL Anda yang sudah dites dan berfungsi
+        // API URL (SUDAH BENAR)
         const API_URL = 'https://script.google.com/macros/s/AKfycbwXZK002PumCpPTOnd7ik8zPmSS_OumEYa3QBPd3NWtwaNdtarFLdN7ISAf6lc2GuIC/exec'; 
 
+        // KREDENSIAL ADMIN
+        const ADMIN_USER = 'admin';
+        const ADMIN_PASS = 'pesantren2026';
+
+        // ELEMEN UI
+        const viewPublik = document.getElementById('view-publik');
+        const viewAdmin = document.getElementById('view-admin');
+        const menuPublik = document.getElementById('menu-publik');
+        const menuAdmin = document.getElementById('menu-admin');
+        const modalLogin = document.getElementById('modal-login');
+
+        // --- SISTEM LOGIN 1 PINTU ---
+        function bukaModalLogin() { modalLogin.classList.remove('hidden'); modalLogin.classList.add('flex'); }
+        function tutupModalLogin() { modalLogin.classList.add('hidden'); modalLogin.classList.remove('flex'); }
+
+        document.getElementById('form-login').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const pesanLogin = document.getElementById('pesan-login');
+
+            if (user === ADMIN_USER && pass === ADMIN_PASS) {
+                // Berhasil Login
+                sessionStorage.setItem('isLoggedIn', 'true');
+                tutupModalLogin();
+                tampilkanAdmin();
+                document.getElementById('password').value = ''; // bersihkan password
+                pesanLogin.classList.add('hidden');
+            } else {
+                pesanLogin.classList.remove('hidden');
+            }
+        });
+
+        function tampilkanAdmin() {
+            viewPublik.classList.add('hidden');
+            viewAdmin.classList.remove('hidden');
+            menuPublik.classList.add('hidden');
+            menuAdmin.classList.remove('hidden');
+            menuAdmin.classList.add('flex');
+            document.getElementById('input-tanggal').valueAsDate = new Date();
+        }
+
+        function tampilkanPublik() {
+            viewAdmin.classList.add('hidden');
+            viewPublik.classList.remove('hidden');
+            
+            // Cek jika sedang login, tetap tampilkan menu admin di navbar
+            if(sessionStorage.getItem('isLoggedIn') === 'true'){
+                menuPublik.classList.add('hidden');
+                menuAdmin.classList.remove('hidden');
+                menuAdmin.classList.add('flex');
+            } else {
+                menuAdmin.classList.add('hidden');
+                menuAdmin.classList.remove('flex');
+                menuPublik.classList.remove('hidden');
+                menuPublik.classList.add('md:flex');
+            }
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('isLoggedIn');
+            tampilkanPublik();
+        }
+
+        // Cek sesi login saat halaman dimuat
+        if (sessionStorage.getItem('isLoggedIn') === 'true') {
+            tampilkanAdmin();
+        } else {
+            tampilkanPublik();
+        }
+
+
+        // --- SISTEM LOAD BERITA DARI SPREADSHEET ---
         async function muatBerita() {
             const wadah = document.getElementById('wadah-berita');
-            
+            wadah.innerHTML = '<div class="col-span-full text-center text-gray-500 py-10"><i class="fas fa-spinner fa-spin mr-2"></i> Mengambil data dari server...</div>';
+
             try {
-                // Fetch dengan parameter waktu untuk mencegah cache
                 const response = await fetch(API_URL + '?t=' + new Date().getTime());
-                
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
                 const json = await response.json();
                 
                 if (json.status === 'success' && json.data.length > 0) {
                     wadah.innerHTML = ''; 
-                    const beritaTerbaru = json.data.slice(0, 3); // Ambil 3 berita terbaru
+                    const beritaTerbaru = json.data.slice(0, 3); 
                     
                     beritaTerbaru.forEach(item => {
                         let warnaLabel = 'bg-pesantren-600';
                         if(item.Kategori === 'Kegiatan') warnaLabel = 'bg-emas';
                         if(item.Kategori === 'Prestasi') warnaLabel = 'bg-blue-600';
 
-                        let tanggalFormat = 'Tanggal Tidak Valid';
-                        try {
-                           tanggalFormat = new Date(item.Tanggal).toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric'});
-                        } catch (e) { console.warn("Format tanggal salah:", item.Tanggal); }
+                        let tanggalFormat = 'Tanggal';
+                        try { tanggalFormat = new Date(item.Tanggal).toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric'}); } catch (e) {}
 
                         const card = `
-                        <div class="bg-white rounded-lg overflow-hidden shadow border border-gray-200 flex flex-col h-full">
-                            <div class="h-48 bg-gray-200 relative overflow-hidden">
-                                <img src="${item.URL_Gambar}" alt="${item.Judul}" class="w-full h-full object-cover" onerror="this.src='https://via.placeholder.com/400x250?text=RH'">
-                                <span class="absolute top-4 left-4 ${warnaLabel} text-white text-xs font-bold px-3 py-1 rounded shadow-sm">${item.Kategori}</span>
+                        <div class="bg-white rounded-lg overflow-hidden shadow border border-gray-200 flex flex-col h-full hover:shadow-lg transition">
+                            <div class="h-48 bg-gray-200 relative overflow-hidden group">
+                                <img src="${item.URL_Gambar}" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110" onerror="this.src='https://via.placeholder.com/400x250?text=RH'">
+                                <span class="absolute top-4 left-4 ${warnaLabel} text-white text-xs font-bold px-3 py-1 rounded shadow-sm z-10">${item.Kategori}</span>
                             </div>
                             <div class="p-5 flex flex-col flex-grow">
-                                <div class="text-xs text-gray-500 mb-2">
-                                    <i class="far fa-calendar-alt mr-1"></i> ${tanggalFormat}
-                                </div>
+                                <div class="text-xs text-gray-500 mb-2"><i class="far fa-calendar-alt mr-1"></i> ${tanggalFormat}</div>
                                 <h3 class="font-bold text-lg mb-2 line-clamp-2 text-gray-800">${item.Judul}</h3>
                                 <p class="text-gray-600 text-sm line-clamp-3 mb-4">${item.Isi_Berita}</p>
-                                <a href="#" class="mt-auto text-pesantren-600 font-medium text-sm hover:text-emas transition">Baca selengkapnya &rarr;</a>
+                                <a href="#" class="mt-auto text-pesantren-600 font-bold text-sm hover:text-emas transition">Baca selengkapnya &rarr;</a>
                             </div>
-                        </div>
-                        `;
+                        </div>`;
                         wadah.innerHTML += card;
                     });
                 } else {
                     wadah.innerHTML = '<div class="col-span-full text-center text-gray-500">Belum ada berita yang dipublikasikan.</div>';
                 }
             } catch (error) {
-                console.error('Error fetching data:', error);
-                wadah.innerHTML = `<div class="col-span-full text-center text-red-500 py-10">
-                    <p class="font-bold">Gagal memuat berita.</p>
-                </div>`;
+                wadah.innerHTML = `<div class="col-span-full text-center text-red-500 py-10 font-bold"><i class="fas fa-exclamation-triangle mr-2"></i> Gagal menghubungkan ke Database.</div>`;
             }
         }
 
-        // Panggil fungsi saat web pertama kali dibuka
+
+        // --- SISTEM TAMBAH BERITA KE SPREADSHEET (POST) ---
+        document.getElementById('form-tambah-berita').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btnSubmit = document.getElementById('btn-submit');
+            const pesanStatus = document.getElementById('pesan-status');
+            
+            const dataBaru = {
+                Tanggal: document.getElementById('input-tanggal').value,
+                Kategori: document.getElementById('input-kategori').value,
+                Judul: document.getElementById('input-judul').value,
+                URL_Gambar: document.getElementById('input-gambar').value || 'https://via.placeholder.com/400x250?text=Kabar+Pesantren',
+                Isi_Berita: document.getElementById('input-isi').value
+            };
+
+            btnSubmit.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Memproses ke Database...';
+            btnSubmit.disabled = true;
+            pesanStatus.classList.add('hidden');
+
+            try {
+                const response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(dataBaru) });
+                const result = await response.json();
+                
+                if (result.status === 'success') {
+                    pesanStatus.textContent = 'Alhamdulillah, Berita berhasil diterbitkan!';
+                    pesanStatus.className = 'p-4 rounded-lg text-center font-bold mb-4 bg-green-100 text-green-800 border border-green-300';
+                    this.reset(); 
+                    document.getElementById('input-tanggal').valueAsDate = new Date();
+                    muatBerita(); // Perbarui grid berita di background
+                } else {
+                    throw new Error(result.message);
+                }
+            } catch (error) {
+                pesanStatus.textContent = 'Gagal menyimpan. Pastikan Web App Anda di Google Script sudah di-Deploy ulang. Error: ' + error.message;
+                pesanStatus.className = 'p-4 rounded-lg text-center font-bold mb-4 bg-red-100 text-red-800 border border-red-300';
+            } finally {
+                btnSubmit.innerHTML = '<i class="fas fa-paper-plane mr-2"></i> Terbitkan ke Website';
+                btnSubmit.disabled = false;
+                pesanStatus.classList.remove('hidden');
+                setTimeout(() => pesanStatus.classList.add('hidden'), 7000);
+            }
+        });
+
+        // Muat berita saat web pertama dibuka
         document.addEventListener('DOMContentLoaded', muatBerita);
     </script>
 </body>

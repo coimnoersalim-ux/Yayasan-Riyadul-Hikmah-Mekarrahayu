@@ -138,9 +138,10 @@ footer{background:var(--hv);color:#fff;padding:30px 0;font-size:14px}footer .w{d
 <section><div class="c" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center"><div><h3>Tertarik mondok di Riyadul Hikmah?</h3><p>Lihat syarat dan jadwal pendaftaran santri baru.</p></div><a class="btn" href="#ppdb">Daftar santri baru</a></div></section>
 </div></div>
 <div id="vAbs" style="display:none">
-<div class="card" id="lock" style="max-width:440px;margin:30px auto;text-align:center"><h2>Portal Admin</h2><p class="note" id="lp">Memuat…</p></div>
+<div class="card" id="lock" style="max-width:420px;margin:30px auto;text-align:center"><h2>Portal Admin</h2><p class="note" id="lp">Memuat…</p>
+<form id="lf" style="display:none"><input id="le" type="email" placeholder="Email" required style="width:100%;margin-bottom:8px"><input id="lpw" type="password" placeholder="Password" required style="width:100%;margin-bottom:10px"><button class="btn p" style="width:100%">Masuk</button></form><button class="btn" id="lo2" style="display:none;margin-top:8px">Keluar</button></div>
 <div id="adm" style="display:none"><div class="w">
- <div class="hd"><div><h1>Absensi QR · Darul Hikmah</h1><p>MTs &amp; MA Darul Hikmah — Yayasan Riyadul Hikmah</p></div><div class="jam"><b id="jam">--.--.--</b><span id="tgl"></span></div></div>
+ <div class="hd"><div><h1>Absensi QR · Darul Hikmah</h1><p>MTs &amp; MA Darul Hikmah — Yayasan Riyadul Hikmah</p></div><div class="jam"><b id="jam">--.--.--</b><span id="tgl"></span><div id="role" style="font-size:12px;font-weight:700;margin-top:4px"></div><button class="btn" id="lo" style="margin-top:6px;padding:4px 10px;font-size:12px">Keluar</button></div></div>
  <div class="tabs"><button class="tab on" data-t="scan">📷 Scan</button><button class="tab" data-t="rekap">📋 Rekap</button><button class="tab" data-t="siswa">👥 Siswa &amp; Kartu QR</button></div>
 
  <section class="sec on" id="scan"><div class="card"><h2>Scan kartu siswa</h2>
@@ -182,11 +183,13 @@ addEventListener("hashchange",rute);rute();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 (function(){
+var SUPABASE_URL="ISI_URL_PROYEK_SUPABASE",SUPABASE_KEY="ISI_ANON_KEY";
 var $=function(i){return document.getElementById(i)};
-var db=null,adm=false,wr=true,S=[],A={},CUT="07:15",un={},pend=[];
+var SB=null,adm=false,S=[],A={},CUT="07:15",pend=[],tim=null;
 var NM={H:"Hadir",T:"Terlambat",I:"Izin",S:"Sakit",A:"Alpa"};
 function p2(n){return(n<10?"0":"")+n}
 function tgl(){var d=new Date();return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())}
@@ -196,18 +199,21 @@ function unit(k){var r=String(k).trim().split(/[\s-]/)[0].toUpperCase();return["
 function tab(t){document.querySelectorAll("#vAbs .sec").forEach(function(s){s.classList.toggle("on",s.id==t)});document.querySelectorAll("#vAbs .tab").forEach(function(b){b.classList.toggle("on",b.dataset.t==t)});if(t=="rekap")rekap();if(t=="siswa")kartu();if(t=="scan")hari()}
 document.querySelectorAll("#vAbs .tab").forEach(function(b){b.onclick=function(){tab(b.dataset.t)}});
 function tampil(c,m){var r=$("res");r.className="res "+c;r.textContent=m}
-function sub(k,d){if(!db)return;if(un[k])un[k]();un[k]=db.collection("absen").where("d","==",d).onSnapshot(function(s){var m={};s.docs.forEach(function(x){var v=x.data();m[v.i]=v});A[d]=m;if(d==tgl())hari();if(d==$("rd").value)rekap()},function(){})}
-function proses(nis){var x=cari(nis);if(!x){tampil("er","NIS "+nis+" tidak ditemukan");return}
+async function muatSiswa(){var r=await SB.from("siswa").select("*").order("kelas").order("nama");if(r.error)return;S=r.data.map(function(x){return{i:x.nis,n:x.nama,k:x.kelas,u:x.unit}});kartu();rekap();hari()}
+async function muatAbsen(d){var r=await SB.from("absen").select("*").eq("tgl",d);if(r.error)return;var m={};r.data.forEach(function(x){m[x.nis]={s:x.status,t:x.jam}});A[d]=m;if(d==tgl())hari();if(d==$("rd").value)rekap()}
+async function proses(nis){var x=cari(nis);if(!x){tampil("er","NIS "+nis+" tidak ditemukan");return}
  var d=tgl(),a=(A[d]||{})[nis];if(a){tampil("wr",x.n+" sudah absen pukul "+a.t);return}
  var n=new Date(),t=p2(n.getHours())+":"+p2(n.getMinutes()),s=t<=CUT?"H":"T";
- db.doc("absen/"+d+"_"+nis).set({d:d,i:nis,s:s,t:t}).then(function(){tampil(s=="H"?"ok":"wr",x.n+" ("+x.k+") — "+NM[s]+" "+t)}).catch(function(){tampil("er","Gagal menyimpan. Anda mungkin tidak punya izin mencatat absen.")})}
+ var r=await SB.from("absen").insert({tgl:d,nis:nis,status:s,jam:t});
+ if(r.error){if(r.error.code=="23505")tampil("wr",x.n+" sudah absen hari ini");else tampil("er","Gagal menyimpan: "+r.error.message);muatAbsen(d);return}
+ (A[d]=A[d]||{})[nis]={s:s,t:t};hari();tampil(s=="H"?"ok":"wr",x.n+" ("+x.k+") — "+NM[s]+" "+t)}
 var last="",lt=0;
 function onCode(txt){var n=Date.now();if(txt==last&&n-lt<3000)return;last=txt;lt=n;if(txt.indexOf("RH:")==0)proses(txt.slice(3));else tampil("er","QR tidak dikenali")}
 var sc=null;
 $("go").onclick=function(){try{if(!sc)sc=new Html5Qrcode("reader");sc.start({facingMode:"environment"},{fps:10,qrbox:220},onCode).catch(function(){tampil("er","Kamera tidak bisa dibuka. Izinkan akses kamera, atau gunakan input NIS manual.")})}catch(e){tampil("er","Pemindai belum siap, muat ulang halaman.")}};
 $("stop").onclick=function(){if(sc)sc.stop().catch(function(){})};
 $("mf").onsubmit=function(e){e.preventDefault();var v=$("mn").value.trim();if(v)proses(v);$("mn").value=""};
-$("cut").onchange=function(){CUT=this.value;if(adm&&db)db.doc("pengaturan/cut").set({v:CUT})};
+$("cut").onchange=function(){CUT=this.value;if(adm)SB.from("pengaturan").upsert({k:"cut",v:CUT})};
 function hari(){var d=A[tgl()]||{},r=Object.keys(d).map(function(i){return[i,d[i]]}).sort(function(a,b){return b[1].t<a[1].t?-1:1});
  $("hari").innerHTML=r.map(function(p){var x=cari(p[0])||{n:p[0],k:"-"};return '<tr><td>'+p[1].t+'</td><td>'+esc(x.n)+'</td><td>'+esc(x.k)+'</td><td class="s-'+p[1].s+'">'+NM[p[1].s]+'</td></tr>'}).join("")||'<tr><td colspan="4">Belum ada yang absen.</td></tr>'}
 $("rd").value=tgl();
@@ -215,33 +221,40 @@ function kls(){var k=[];S.forEach(function(x){if(k.indexOf(x.k)<0)k.push(x.k)});
 function rekap(){kls();var d=A[$("rd").value]||{},k=$("rk").value,L=S.filter(function(x){return!k||x.k==k}),c={H:0,T:0,I:0,S:0,A:0};
  var rows=L.map(function(x){var a=d[x.i],s=a?a.s:"A";c[s]++;return{x:x,s:s,t:a?a.t:"-"}});
  $("sum").innerHTML=Object.keys(NM).map(function(s){return '<div>'+NM[s]+'<b>'+c[s]+'</b></div>'}).join("");
- $("rb").innerHTML=rows.map(function(r){return '<tr><td>'+esc(r.x.n)+'</td><td>'+esc(r.x.k)+'</td><td>'+r.t+'</td><td><select data-i="'+esc(r.x.i)+'" class="s-'+r.s+'"'+(wr?"":" disabled")+'>'+Object.keys(NM).map(function(s){return '<option value="'+s+'"'+(s==r.s?" selected":"")+'>'+NM[s]+'</option>'}).join("")+'</select></td></tr>'}).join("")||'<tr><td colspan="4">Belum ada siswa. Impor dari Excel di tab Siswa.</td></tr>';
+ $("rb").innerHTML=rows.map(function(r){return '<tr><td>'+esc(r.x.n)+'</td><td>'+esc(r.x.k)+'</td><td>'+r.t+'</td><td><select data-i="'+esc(r.x.i)+'" class="s-'+r.s+'">'+Object.keys(NM).map(function(s){return '<option value="'+s+'"'+(s==r.s?" selected":"")+'>'+NM[s]+'</option>'}).join("")+'</select></td></tr>'}).join("")||'<tr><td colspan="4">Belum ada siswa. Impor dari Excel di tab Siswa.</td></tr>';
  window._rows=rows}
-$("rd").onchange=function(){sub("rek",this.value);rekap()};$("rk").onchange=rekap;
-$("rb").onchange=function(e){var i=e.target.dataset.i,dt=$("rd").value,s=e.target.value;if(!i||!db)return;var r=db.doc("absen/"+dt+"_"+i);var p=s=="A"?r.delete():r.set({d:dt,i:i,s:s,t:((A[dt]||{})[i]||{}).t||"-"});p.catch(function(){alert("Gagal menyimpan perubahan")})};
+$("rd").onchange=function(){muatAbsen(this.value)};$("rk").onchange=rekap;
+$("rb").onchange=function(e){var i=e.target.dataset.i,dt=$("rd").value,s=e.target.value;if(!i)return;var q=s=="A"?SB.from("absen").delete().eq("tgl",dt).eq("nis",i):SB.from("absen").upsert({tgl:dt,nis:i,status:s,jam:((A[dt]||{})[i]||{}).t||"-"},{onConflict:"tgl,nis"});q.then(function(r){if(r.error)alert("Gagal: "+r.error.message);muatAbsen(dt)})};
 $("csv").onclick=function(){var t=$("ta");var o="Nama,Kelas,Jam,Status\n"+(window._rows||[]).map(function(r){return[r.x.n,r.x.k,r.t,NM[r.s]].join(",")}).join("\n");t.value=o;t.style.display="block";t.select();try{navigator.clipboard.writeText(o)}catch(e){}};
 function kartu(){var c=$("kcards");c.innerHTML=S.map(function(x,n){return '<div class="kt"><b>'+esc(x.n)+'</b><small>'+esc(x.u)+' · '+esc(x.k)+' · NIS '+esc(x.i)+'</small><div class="q" id="q'+n+'"></div>'+(adm?'<button class="btn" data-d="'+esc(x.i)+'">Hapus</button>':'')+'</div>'}).join("")||'<p class="note">Belum ada siswa.</p>';
  S.forEach(function(x,n){try{new QRCode($("q"+n),{text:"RH:"+x.i,width:110,height:110})}catch(e){}})}
-$("kcards").onclick=function(e){var i=e.target.dataset.d;if(i&&db&&confirm("Hapus siswa ini?"))db.doc("siswa/"+i).delete().catch(function(){alert("Gagal menghapus")})};
-$("sf").onsubmit=function(e){e.preventDefault();var i=$("si").value.trim().replace(/[\/\s]/g,"");if(!i)return;if(cari(i)){alert("NIS sudah dipakai");return}var f=this;db.doc("siswa/"+i).set({n:$("sn").value.trim(),i:i,k:$("sk").value.trim(),u:$("su").value}).then(function(){f.reset()}).catch(function(){alert("Gagal menyimpan. Hanya admin yang boleh menambah siswa.")})};
+$("kcards").onclick=function(e){var i=e.target.dataset.d;if(i&&confirm("Hapus siswa ini beserta data absennya?"))SB.from("siswa").delete().eq("nis",i).then(function(r){if(r.error)alert("Gagal menghapus");muatSiswa()})};
+$("sf").onsubmit=function(e){e.preventDefault();var i=$("si").value.trim().replace(/[\/\s]/g,"");if(!i)return;if(cari(i)){alert("NIS sudah dipakai");return}var f=this;SB.from("siswa").insert({nis:i,nama:$("sn").value.trim(),kelas:$("sk").value.trim(),unit:$("su").value}).then(function(r){if(r.error)alert("Gagal menyimpan: "+r.error.message);else{f.reset();muatSiswa()}})};
 $("xf").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var wb=XLSX.read(r.result,{type:"array"}),rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:""});
  var h=rows[0].map(function(c){return String(c).toLowerCase()}),hasH=h.some(function(c){return c.indexOf("nama")>-1}),cn=0,ci=1,ck=2,cu=3;
  if(hasH){var ix=function(k,d){var j=h.findIndex(function(c){return c.indexOf(k)>-1});return j>-1?j:d};cn=ix("nama",0);ci=ix("nis",1);ck=ix("kelas",2);cu=ix("unit",3);rows=rows.slice(1)}
- pend=rows.map(function(r){var k=String(r[ck]||"").trim(),u=String(r[cu]||"").trim().toUpperCase();return{n:String(r[cn]||"").trim(),i:String(r[ci]||"").replace(/[\/\s]/g,""),k:k,u:u=="MA"?"MA":u=="MTS"?"MTs":unit(k)}}).filter(function(x){return x.n&&x.i});
+ var m={};rows.forEach(function(r){var k=String(r[ck]||"").trim(),u=String(r[cu]||"").trim().toUpperCase(),x={n:String(r[cn]||"").trim(),i:String(r[ci]||"").replace(/[\/\s]/g,""),k:k,u:u=="MA"?"MA":u=="MTS"?"MTs":unit(k)};if(x.n&&x.i)m[x.i]=x});
+ pend=Object.keys(m).map(function(i){return m[i]});
  $("xs").textContent=pend.length+" siswa terbaca dari "+f.name+".";$("xgo").style.display=pend.length?"inline-block":"none"}catch(e){$("xs").textContent="File tidak bisa dibaca. Pastikan format .xlsx atau .csv.";pend=[]}};r.readAsArrayBuffer(f)};
-$("xgo").onclick=async function(){var b=this,n=0;b.disabled=true;try{for(var k=0;k<pend.length;k++){await db.doc("siswa/"+pend[k].i).set(pend[k]);n++;$("xs").textContent="Mengimpor "+n+"/"+pend.length+"…"}$("xs").textContent="Selesai: "+n+" siswa diimpor.";pend=[];b.style.display="none"}catch(e){$("xs").textContent="Berhenti di "+n+" siswa. Hanya admin yang boleh mengimpor."}b.disabled=false};
+$("xgo").onclick=async function(){var b=this,n=0;b.disabled=true;try{for(var k=0;k<pend.length;k+=200){var ch=pend.slice(k,k+200).map(function(x){return{nis:x.i,nama:x.n,kelas:x.k,unit:x.u}});var r=await SB.from("siswa").upsert(ch);if(r.error)throw r.error;n+=ch.length;$("xs").textContent="Mengimpor "+n+"/"+pend.length+"…"}$("xs").textContent="Selesai: "+n+" siswa diimpor.";pend=[];b.style.display="none";muatSiswa()}catch(e){$("xs").textContent="Berhenti di "+n+" siswa. "+(e.message||"")}b.disabled=false};
 function detak(){var d=new Date();$("jam").textContent=p2(d.getHours())+"."+p2(d.getMinutes())+"."+p2(d.getSeconds());$("tgl").textContent=d.toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}
 detak();setInterval(detak,1000);
-async function init(){var u=null;
- try{if(window.claude){db=await claude.use("db");u=await claude.use("user")}}catch(e){}
- if(!db){$("lp").textContent="Portal Admin memerlukan login akun Claude dan izin dari pemilik website. Buka lewat tautan yang dibagikan kepada Anda, lalu masuk.";return}
- try{adm=!!(u&&await u.canEdit());var w=u?await u.can("data.write"):null;wr=adm||w!==false}catch(e){}
- $("lock").style.display="none";$("adm").style.display="block";
+function keluar(){if(tim)clearInterval(tim);SB.auth.signOut().then(function(){location.reload()})}
+$("lo").onclick=keluar;$("lo2").onclick=keluar;
+$("lf").onsubmit=async function(e){e.preventDefault();$("lp").textContent="Masuk…";var r=await SB.auth.signInWithPassword({email:$("le").value.trim(),password:$("lpw").value});if(r.error){$("lp").textContent="Email atau password salah.";return}mulai()};
+async function mulai(){var s=await SB.auth.getSession(),ses=s.data.session;
+ if(!ses){$("lp").textContent="Masuk dengan akun yang diberikan admin yayasan.";$("lf").style.display="block";return}
+ $("lf").style.display="none";
+ var p=await SB.from("profiles").select("role").eq("id",ses.user.id).maybeSingle(),role=p.data&&p.data.role;
+ if(role!="admin"&&role!="guru"){$("lp").textContent="Akun "+ses.user.email+" belum diberi peran. Hubungi admin yayasan.";$("lo2").style.display="inline-block";return}
+ adm=role=="admin";$("lock").style.display="none";$("adm").style.display="block";$("role").textContent="Masuk sebagai: "+(adm?"Admin":"Guru")+" ("+ses.user.email+")";
  if(!adm){$("imp").style.display="none";$("sfcard").style.display="none";$("cut").disabled=true}
- db.collection("siswa").onSnapshot(function(s){S=s.docs.map(function(x){return x.data()}).sort(function(a,b){return a.k+a.n<b.k+b.n?-1:1});kartu();rekap();hari()},function(){});
- db.doc("pengaturan/cut").onSnapshot(function(d){if(d.exists){CUT=d.data().v||CUT;$("cut").value=CUT}},function(){});
- sub("hari",tgl());sub("rek",$("rd").value)}
-$("cut").value=CUT;init();
+ var c=await SB.from("pengaturan").select("v").eq("k","cut").maybeSingle();if(c.data){CUT=c.data.v;$("cut").value=CUT}
+ await muatSiswa();muatAbsen(tgl());muatAbsen($("rd").value);
+ tim=setInterval(function(){if(!document.hidden){muatAbsen(tgl());if($("rd").value!=tgl())muatAbsen($("rd").value)}},10000)}
+$("cut").value=CUT;
+if(SUPABASE_URL.indexOf("http")!=0||!window.supabase){$("lp").textContent="Konfigurasi Supabase belum diisi. Lihat panduan pemasangan."}
+else{SB=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);mulai()}
 })();
 </script>
 </body>

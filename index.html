@@ -1,538 +1,248 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal & SIMP | PP Riyadul Hikmah</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        pesantren: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d' },
-                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#0F9D75', 700: '#0B7A57', 800: '#065f43', 900: '#1b2433' },
-                        sidebar: '#1e293b',
-                        emas: '#d97706'
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        ::-webkit-scrollbar { width: 6px; height: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yayasan Riyadul Hikmah Mekarrahayu</title>
+<style>
+:root{--bg:#F4F7F5;--surface:#fff;--ink:#14231D;--muted:#5E6F67;--line:#DDE5E0;--hv:#0B5F45;--hv2:#0B7A57;--gold:#F4B24E;--gdk:#8A5A00;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1613;--surface:#16211C;--ink:#E7F0EB;--muted:#93A59B;--line:#25352D;--hv2:#2FAE83;--gdk:#F4B24E}}
+:root[data-theme="dark"]{--bg:#0E1613;--surface:#16211C;--ink:#E7F0EB;--muted:#93A59B;--line:#25352D;--hv2:#2FAE83;--gdk:#F4B24E}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:inherit;text-decoration:none}
+.w{max-width:1060px;margin:0 auto;padding:0 18px}
+.tb{background:var(--hv);color:#fff;font-size:13px}.tb .w{display:flex;justify-content:space-between;align-items:center;padding-top:8px;padding-bottom:8px;gap:10px;flex-wrap:wrap}
+.st{background:#FBE3E3;color:#9B1C1C;border-radius:99px;padding:2px 12px;font-weight:700;margin-right:8px}.st.buka{background:#D9F5E8;color:#0B6B4F}
+.nav{background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.nav .w{display:flex;align-items:center;gap:18px;padding-top:10px;padding-bottom:10px}
+.brand{display:flex;gap:10px;align-items:center}.mk{width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,#0B7A57,#C9972B);color:#fff;display:grid;place-items:center;font-weight:800}
+.brand b{display:block;line-height:1.2}.brand small{color:var(--muted);font-size:12px}
+.menu{display:flex;gap:16px;flex:1;overflow-x:auto;font-weight:600;font-size:14px}.menu a{padding:6px 0;white-space:nowrap;border-bottom:2px solid transparent}.menu a:hover{border-color:var(--hv2);color:var(--hv2)}
+.cta{background:var(--hv);color:#fff;border-radius:99px;padding:10px 18px;font-weight:700;white-space:nowrap}
+.hero{background:linear-gradient(120deg,#073F2F,#0B6B4F 60%,#13896A);color:#fff;padding:54px 0}
+.hero .w{display:grid;grid-template-columns:1fr 1.1fr;gap:30px;align-items:center}
+.hero .s{color:var(--gold);font-weight:700;font-size:20px}.hero .k{font-size:12px;letter-spacing:.1em;opacity:.8;font-weight:700;margin:6px 0}
+.hero h1{margin:4px 0;font-size:40px;line-height:1.1;letter-spacing:-.02em}.hero .m{color:var(--gold);font-size:22px;font-weight:700;margin:10px 0 16px}
+.sr{display:flex;background:#fff;border-radius:14px;padding:6px;max-width:460px}.sr input{flex:1;border:0;outline:0;padding:10px;font:inherit;min-width:0;color:#14231D}.sr button{background:var(--hv);color:#fff;border:0;border-radius:10px;padding:0 18px;font-weight:700}
+.cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cards a{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:16px;padding:14px;display:block}.cards a:hover{background:rgba(255,255,255,.2)}
+.cards b{display:block}.cards span{font-size:12.5px;opacity:.85}
+.cards a.u{background:var(--gold);color:#3A2600;border-color:var(--gold)}.cards a.u span{opacity:.85}
+.bn{background:var(--gold);color:#3A2600;border-radius:16px;padding:18px 22px;display:flex;justify-content:space-between;font-weight:800;margin:-26px 0 18px;position:relative;gap:12px;flex-wrap:wrap}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:34px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px}.stat b{display:block;font-size:26px;color:var(--hv2);letter-spacing:-.02em}.stat span{color:var(--muted);font-size:13.5px}
+h2.t{font-size:24px;letter-spacing:-.02em;margin:0 0 4px}.sub{color:var(--muted);margin:0 0 16px}
+section{margin-bottom:40px}
+.spot{background:var(--surface);border:2px solid var(--gold);border-radius:22px;padding:26px;display:grid;grid-template-columns:1.2fr 1fr;gap:24px}
+.tag{background:var(--gold);color:#3A2600;font-size:11px;font-weight:800;letter-spacing:.08em;padding:3px 10px;border-radius:99px}
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pg div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px;font-weight:600;font-size:14px}
+.btn{display:inline-block;background:var(--hv);color:#fff;border-radius:10px;padding:10px 18px;font-weight:700}
+.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.c{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px}.c h3{margin:0 0 4px;font-size:17px}.c p{margin:0;color:var(--muted);font-size:14px}.c small{color:var(--gdk);font-weight:700}
+.c .im{height:110px;border-radius:12px;background:linear-gradient(135deg,#0B7A57,#C9972B);opacity:.85;margin-bottom:12px}
+footer{background:var(--hv);color:#fff;padding:30px 0;font-size:14px}footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}footer p{margin:2px 0;opacity:.9}
+@media(max-width:860px){.hero .w,.spot{grid-template-columns:1fr}.hero h1{font-size:32px}.nav .w{flex-wrap:wrap}.menu{order:3;flex-basis:100%}}
+.ph{background:linear-gradient(120deg,#073F2F,#0B6B4F 60%,#A9801E 150%);color:#fff;padding:44px 0}.ph h1{margin:8px 0 6px;font-size:36px;letter-spacing:-.02em}.ph p{margin:0;max-width:640px;opacity:.92}.ph .tag{display:inline-block}
+.ph a.back{color:var(--gold);font-weight:700;font-size:14px}
+.tl{border-left:3px solid var(--gold);padding-left:18px}.tl div{margin-bottom:14px}.tl b{display:block;color:var(--hv2)}
+.jd{display:grid;grid-template-columns:80px 1fr;gap:8px 14px}.jd b{color:var(--hv2)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px}.av{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#0B7A57,#C9972B);margin-bottom:10px}
+.ol{margin:0;padding-left:20px;color:var(--muted)}.ol li{margin-bottom:6px}
+@media(max-width:860px){.g2{grid-template-columns:1fr}.ph h1{font-size:28px}}
+#vAbs{--sf:var(--surface);--mu:var(--muted);--ln:var(--line);--hvr:var(--bg);--ak:var(--hv2);--gd:#C9972B;--ok:#0B7A57;--wr:#B7791F;--er:#B42318;padding-top:16px;padding-bottom:30px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #vAbs{--ok:#3FC595;--wr:#E3B650;--er:#F97066}}
+:root[data-theme="dark"] #vAbs{--ok:#3FC595;--wr:#E3B650;--er:#F97066}
+#vAbs .hd{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:linear-gradient(110deg,#0B6B4F,#13896A 60%,#A9801E 140%);color:#fff;border-radius:20px;padding:20px 24px;margin-bottom:14px}
+#vAbs .hd h1{margin:0;font-size:22px}#vAbs .hd p{margin:2px 0 0;opacity:.9;font-size:14px}#vAbs .jam{text-align:right}#vAbs .jam b{font-size:28px;font-variant-numeric:tabular-nums;display:block;line-height:1.1}
+#vAbs .tabs{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+#vAbs button,#vAbs select,#vAbs input{font:inherit}
+#vAbs .tab{border:1px solid var(--ln);background:var(--sf);color:var(--ink);border-radius:99px;padding:8px 16px;font-weight:700;cursor:pointer}#vAbs .tab.on{background:var(--ak);border-color:var(--ak);color:#fff}
+#vAbs .card{background:var(--sf);border:1px solid var(--ln);border-radius:18px;padding:18px;margin-bottom:14px}#vAbs .card h2{margin:0 0 12px;font-size:17px}
+#vAbs .btn{display:inline-block;border:1px solid var(--ln);background:var(--sf);color:var(--ink);border-radius:10px;padding:8px 14px;font-weight:600;cursor:pointer}#vAbs .btn.p{background:var(--ak);border-color:var(--ak);color:#fff}
+#vAbs input,#vAbs select{padding:9px 11px;border:1px solid var(--ln);border-radius:10px;background:var(--sf);color:var(--ink);min-width:0}
+#vAbs .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+#vAbs section{margin:0}#vAbs .sec{display:none}#vAbs .sec.on{display:block}
+#vAbs #reader{width:100%;max-width:380px;margin:0 auto 10px;border-radius:14px;overflow:hidden;background:var(--hvr);min-height:60px}
+#vAbs .res{padding:14px;border-radius:12px;font-weight:700;margin:10px 0;display:none}#vAbs .res.ok{display:block;background:#D9F5E8;color:#0B6B4F}#vAbs .res.wr{display:block;background:#FBF0D5;color:#8A5A00}#vAbs .res.er{display:block;background:#FBE3E3;color:#9B1C1C}
+#vAbs .sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:12px}#vAbs .sum div{background:var(--hvr);border-radius:12px;padding:10px 12px;color:var(--mu);font-size:13px}#vAbs .sum b{display:block;font-size:22px;color:var(--ink)}
+#vAbs .tw{overflow-x:auto}#vAbs table{width:100%;border-collapse:collapse;font-size:14px}#vAbs th,#vAbs td{text-align:left;padding:8px;border-bottom:1px solid var(--ln)}#vAbs th{font-size:12px;color:var(--mu);text-transform:uppercase}
+#vAbs .s-H{color:var(--ok);font-weight:700}#vAbs .s-T{color:var(--wr);font-weight:700}#vAbs .s-A{color:var(--er);font-weight:700}#vAbs .s-I,#vAbs .s-S{color:var(--mu);font-weight:700}
+#vAbs .kcards{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+#vAbs .kt{border:2px solid var(--gd);border-radius:14px;padding:12px;text-align:center;background:#fff;color:#14231D}#vAbs .kt b{display:block;font-size:14px}#vAbs .kt small{color:#5E6F67}#vAbs .kt .q{display:flex;justify-content:center;margin:8px 0}
+#vAbs textarea{width:100%;min-height:120px;display:none;border:1px solid var(--ln);border-radius:10px;background:var(--sf);color:var(--ink);padding:8px;font:12px monospace}
+#vAbs .note{color:var(--mu);font-size:13px}
+@media print{body *{visibility:hidden}#kcards,#kcards *{visibility:visible}#kcards{position:absolute;left:0;top:0;width:100%}}
+</style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+<body>
+<div class="tb"><div class="w"><div><span class="st" id="st">Kantor tutup</span><span id="jb">Buka Senin–Sabtu 07.30–15.00</span></div><div>📞 08xx-xxxx-xxxx &nbsp; ✉ info@riyadulhikmah.example</div></div></div>
+<header class="nav"><div class="w">
+ <a class="brand" href="#beranda"><div class="mk">RH</div><div><b>Yayasan Riyadul Hikmah</b><small>Mekarrahayu</small></div></a>
+ <nav class="menu"><a href="#beranda">Beranda</a><a href="#pesantren">Pesantren</a><a href="#unit">Unit Pendidikan</a><a href="#berita">Berita</a><a href="#galeri">Galeri</a><a href="#kontak">Kontak</a><a href="#absen">Portal Admin</a></nav>
+ <a class="cta" href="#ppdb">Daftar Santri Baru</a>
+</div></header>
 
-    <!-- ========================================== -->
-    <!-- 1. TAMPILAN PUBLIK (PORTAL WEBSITE)        -->
-    <!-- ========================================== -->
-    <div id="view-publik" class="block">
-        
-        <!-- Navbar Publik -->
-        <nav class="bg-pesantren-800 text-white sticky top-0 z-40 shadow-lg">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between h-16 items-center">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center text-pesantren-800 font-bold text-xl">RH</div>
-                        <div class="flex flex-col">
-                            <span class="font-bold text-lg leading-tight">PP Riyadul Hikmah</span>
-                            <span class="text-xs text-pesantren-100">Yayasan Riyadul Hikmah Mekarrahayu</span>
-                        </div>
-                    </div>
-                    <div class="hidden md:flex space-x-6 text-sm font-medium">
-                        <a href="#" class="hover:text-emas transition">Beranda</a>
-                        <a href="#lembaga" class="hover:text-emas transition">Lembaga</a>
-                        <a href="#berita" class="hover:text-emas transition">Kabar Pesantren</a>
-                        <button onclick="bukaModalLogin()" class="bg-emas hover:bg-yellow-600 text-white px-4 py-2 rounded-md transition shadow-md flex items-center">
-                            <i class="fas fa-lock mr-2"></i> Portal Login
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </nav>
+<div id="vHome"><div class="hero" id="beranda"><div class="w">
+ <div>
+  <div class="s">Ahlan wa Sahlan di</div><div class="k">WEBSITE RESMI YAYASAN</div>
+  <h1>Yayasan Riyadul Hikmah</h1>
+  <div style="font-size:17px;font-weight:600">Mekarrahayu · Pesantren, PAUD, MTs &amp; MA</div>
+  <div class="m">“Berilmu, Berakhlak, Bermanfaat”</div>
+  <div class="sr"><input placeholder="Cari informasi, pendaftaran, berita…" aria-label="Cari"><button>Cari</button></div>
+ </div>
+ <div class="cards">
+  <a class="u" href="#pesantren"><b>🕌 Pondok Pesantren</b><span>Unit unggulan: tahfidz &amp; kajian kitab</span></a>
+  <a href="#ppdb"><b>📝 PPDB Online</b><span>Pendaftaran santri &amp; siswa baru</span></a>
+  <a href="#unit"><b>🏫 Unit Pendidikan</b><span>PAUD, MTs &amp; MA</span></a>
+  <a href="#berita"><b>📰 Berita</b><span>Kabar &amp; kegiatan terbaru</span></a>
+  <a href="#galeri"><b>🖼️ Galeri</b><span>Foto dokumentasi kegiatan</span></a>
+  <a href="#donasi"><b>🤲 Donasi &amp; Wakaf</b><span>Dukung pembangunan pesantren</span></a>
+  <a href="#kontak"><b>📍 Lokasi</b><span>Alamat &amp; petunjuk arah</span></a>
+  <a href="#kontak"><b>💬 Hubungi Kami</b><span>WhatsApp &amp; pesan</span></a>
+ </div>
+</div></div>
 
-        <!-- Hero Section -->
-        <header class="relative bg-pesantren-900 text-white overflow-hidden">
-            <div class="absolute inset-0 opacity-20">
-                <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" class="w-full h-full object-cover">
-            </div>
-            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 flex flex-col items-center text-center">
-                <span class="text-emas font-semibold tracking-wider uppercase text-sm mb-4">Yayasan Riyadul Hikmah Mekarrahayu</span>
-                <h1 class="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-md">
-                    Pondok Pesantren <br> <span class="text-pesantren-100">Riyadul Hikmah</span>
-                </h1>
-                <p class="text-lg md:text-xl text-gray-200 max-w-2xl mb-10">
-                    Mencetak generasi Islami yang unggul dalam ilmu pengetahuan, berakhlak mulia, dan mandiri untuk kemajuan bangsa dan agama.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="#" class="bg-emas hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-lg shadow-lg transition">Informasi PPDB 2027</a>
-                    <a href="#lembaga" class="bg-transparent border-2 border-white hover:bg-white hover:text-pesantren-900 text-white font-bold py-3 px-8 rounded-lg transition">Jelajahi Unit Pendidikan</a>
-                </div>
-            </div>
-        </header>
+<div class="w">
+ <a class="bn" id="ppdb" href="#ppdb"><span>Penerimaan Santri &amp; Siswa Baru Tahun Ajaran 2027/2028</span><span>Lihat selengkapnya →</span></a>
+ <div class="stats" id="stats"></div>
 
-        <!-- Lembaga & Unit Pendidikan -->
-        <section id="lembaga" class="py-16 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl font-bold text-gray-800">Lembaga & Unit Pendidikan</h2>
-                    <div class="w-24 h-1 bg-emas mx-auto mt-4 rounded"></div>
-                    <p class="mt-4 text-gray-600">Terintegrasi dalam satu kawasan di bawah naungan Yayasan Riyadul Hikmah Mekarrahayu.</p>
-                </div>
+ <section id="sorot"><div class="spot">
+  <div><span class="tag">UNIT UNGGULAN</span><h2 class="t" style="margin-top:10px">Pondok Pesantren Riyadul Hikmah</h2>
+   <p class="sub">Tempat santri tumbuh dalam ilmu dan akhlak, dengan pembinaan Al-Qur’an, kajian kitab, dan kehidupan berasrama di bawah bimbingan pengasuh.</p><a class="btn" href="#pesantren">Profil lengkap pesantren →</a></div>
+  <div class="pg"><div>📖 Tahfidz Al-Qur’an</div><div>📚 Kajian Kitab Kuning</div><div>🗣️ Muhadharah</div><div>🌿 Pembinaan Akhlak</div><div>🕋 Praktik Ibadah</div><div>🎶 Hadroh</div></div>
+ </div></section>
 
-                <!-- Pesantren Hero Card -->
-                <div class="bg-pesantren-800 rounded-2xl shadow-xl overflow-hidden mb-10 flex flex-col md:flex-row transform transition hover:shadow-2xl">
-                    <div class="md:w-1/3 bg-pesantren-900 p-8 flex flex-col justify-center items-center text-center border-b-4 md:border-b-0 md:border-r-4 border-emas">
-                        <i class="fas fa-mosque text-6xl text-emas mb-4"></i>
-                        <h3 class="text-2xl font-extrabold text-white tracking-wide">PONDOK PESANTREN</h3>
-                        <span class="text-pesantren-100 font-medium mt-1">Riyadul Hikmah</span>
-                    </div>
-                    <div class="md:w-2/3 p-8 flex flex-col justify-center relative">
-                        <i class="fas fa-book-open absolute right-5 bottom-5 text-8xl text-pesantren-700 opacity-20 pointer-events-none"></i>
-                        <h4 class="text-xl font-bold text-emas mb-3">Pusat Kajian Islam & Pembentukan Karakter</h4>
-                        <p class="text-gray-200 mb-6 leading-relaxed">
-                            Pondok Pesantren Riyadul Hikmah adalah pilar utama pendidikan kami. Berfokus pada pendidikan salafiyah, tahfidzul Qur'an, kajian kitab kuning, dan amaliah ahlussunnah wal jama'ah untuk mencetak kader ulama yang berakhlakul karimah.
-                        </p>
-                        <div>
-                            <a href="#" class="inline-block bg-emas hover:bg-yellow-600 text-white font-bold py-2.5 px-6 rounded-lg transition shadow-md">
-                                Jelajahi Program Pesantren <i class="fas fa-arrow-right text-sm ml-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+ <section id="unit"><h2 class="t">Unit Pendidikan</h2><p class="sub">Lembaga di bawah naungan yayasan</p>
+  <div class="g4" id="units"></div></section>
 
-                <!-- Formal Schools Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-                    <div class="bg-slate-50 rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md hover:border-emas transition flex flex-col items-center text-center">
-                        <div class="w-16 h-16 bg-white text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100">
-                            <i class="fas fa-child"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-gray-800 mb-2">PAUD Kober Al-Hasani</h3>
-                        <p class="text-gray-600 mb-6 text-sm leading-relaxed">Pendidikan usia dini yang berfokus pada pembentukan karakter Islami, kreativitas, dan kemandirian anak secara menyenangkan.</p>
-                    </div>
+ <section id="berita"><h2 class="t">Berita terbaru</h2><p class="sub">Kabar dan kegiatan dari seluruh unit</p>
+  <div class="g4" id="news"></div></section>
 
-                    <div class="bg-slate-50 rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md hover:border-emas transition flex flex-col items-center text-center">
-                        <div class="w-16 h-16 bg-white text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100">
-                            <i class="fas fa-book-reader"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-gray-800 mb-2">MTs Darul Hikmah</h3>
-                        <p class="text-gray-600 mb-6 text-sm leading-relaxed">Madrasah Tsanawiyah terakreditasi dengan kurikulum terpadu yang memadukan ilmu kepesantrenan dan ilmu pengetahuan umum.</p>
-                    </div>
+ <section id="galeri"><h2 class="t">Galeri kegiatan</h2><p class="sub">Ganti kotak berikut dengan foto asli kegiatan.</p>
+  <div class="g4"><div class="c"><div class="im" style="margin:0"></div></div><div class="c"><div class="im" style="margin:0"></div></div><div class="c"><div class="im" style="margin:0"></div></div><div class="c"><div class="im" style="margin:0"></div></div></div></section>
 
-                    <div class="bg-slate-50 rounded-xl border border-gray-200 p-8 shadow-sm hover:shadow-md hover:border-emas transition flex flex-col items-center text-center">
-                        <div class="w-16 h-16 bg-white text-pesantren-600 rounded-full flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-100">
-                            <i class="fas fa-user-graduate"></i>
-                        </div>
-                        <h3 class="text-lg font-bold text-gray-800 mb-2">MA Darul Hikmah</h3>
-                        <p class="text-gray-600 mb-6 text-sm leading-relaxed">Madrasah Aliyah yang membekali santri dengan penguatan literasi sains, kesiapan jenjang tinggi, dan kecakapan hidup.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+ <section id="donasi"><div class="c" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center"><div><h3>Donasi &amp; Wakaf</h3><p>Salurkan infak, sedekah, dan wakaf untuk pembangunan serta operasional pesantren.</p></div><a class="btn" href="#kontak">Cara berdonasi</a></div></section>
+</div>
 
-        <!-- Kabar Pesantren (Grid Publik) -->
-        <section id="berita" class="py-16 bg-slate-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex justify-between items-end mb-10">
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-800">Kabar Pesantren</h2>
-                        <div class="w-24 h-1 bg-emas mt-3 rounded"></div>
-                    </div>
-                </div>
-                
-                <!-- WADAH KARTU BERITA -->
-                <div id="wadah-berita-publik" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="col-span-full text-center text-gray-500 py-10"><i class="fas fa-spinner fa-spin mr-2"></i> Memuat berita...</div>
-                </div>
-            </div>
-        </section>
+</div>
+<div id="vPes" style="display:none">
+<div class="ph"><div class="w"><a class="back" href="#beranda">← Beranda</a><br><span class="tag" style="margin-top:10px">PROFIL PESANTREN</span><h1>Pondok Pesantren Riyadul Hikmah</h1><p>Lembaga pendidikan Islam di bawah Yayasan Riyadul Hikmah Mekarrahayu yang membina santri dalam ilmu, akhlak, dan kemandirian.</p></div></div>
+<div class="w" style="padding-top:28px">
+<section><h2 class="t">Tentang pesantren</h2><div class="c"><p>Pondok Pesantren Riyadul Hikmah adalah unit unggulan yayasan. Santri belajar Al-Qur’an dan kitab, menjalani kehidupan berasrama, dan bersekolah di MTs atau MA Darul Hikmah. <i>(Sesuaikan paragraf ini dengan deskripsi resmi pesantren.)</i></p></div></section>
+<section><h2 class="t">Sejarah singkat</h2><p class="sub">Isi dengan kronologi asli pesantren.</p><div class="tl"><div><b>Tahun ….</b>Pesantren dirintis oleh ….</div><div><b>Tahun ….</b>Berdirinya unit pendidikan formal (MTs/MA Darul Hikmah).</div><div><b>Tahun ….</b>Pengembangan asrama dan fasilitas.</div></div></section>
+<section class="g2"><div class="c"><h3>Visi</h3><p>Mencetak generasi yang berilmu, berakhlak mulia, dan bermanfaat bagi masyarakat. <i>(contoh)</i></p></div><div class="c"><h3>Misi</h3><ol class="ol"><li>Menyelenggarakan pendidikan Al-Qur’an dan kajian kitab.</li><li>Menanamkan akhlak dan kedisiplinan santri.</li><li>Membekali santri dengan keterampilan dan kemandirian.</li></ol></div></section>
+<section><h2 class="t">Pengasuh &amp; pengurus</h2><p class="sub">Ganti dengan foto dan nama asli.</p><div class="g4"><div class="c"><div class="av"></div><h3>KH. …………</h3><p>Pengasuh</p></div><div class="c"><div class="av"></div><h3>……………</h3><p>Ketua Yayasan</p></div><div class="c"><div class="av"></div><h3>……………</h3><p>Mudir / Kepala Pesantren</p></div><div class="c"><div class="av"></div><h3>……………</h3><p>Sekretaris</p></div></div></section>
+<section><h2 class="t">Program pendidikan</h2><div class="g4"><div class="c"><h3>📖 Tahfidz Al-Qur’an</h3><p>Hafalan, murajaah, dan setoran harian.</p></div><div class="c"><h3>📚 Kajian Kitab Kuning</h3><p>Fiqih, akidah, akhlak, dan bahasa Arab.</p></div><div class="c"><h3>🗣️ Muhadharah</h3><p>Latihan pidato dan dakwah.</p></div><div class="c"><h3>🎶 Hadroh &amp; Seni Islami</h3><p>Pembinaan seni dan ekstrakurikuler.</p></div></div></section>
+<section class="g2"><div class="c"><h3>Jadwal harian santri (contoh)</h3><div class="jd"><b>04.00</b><span>Qiyamul lail &amp; Subuh berjamaah</span><b>05.30</b><span>Ngaji Al-Qur’an</span><b>07.00</b><span>Sekolah MTs/MA</span><b>15.30</b><span>Kajian kitab</span><b>18.30</b><span>Maghrib &amp; tadarus</span><b>20.00</b><span>Belajar mandiri</span></div></div><div class="c"><h3>Fasilitas</h3><div class="pg"><div>🛏️ Asrama putra</div><div>🛏️ Asrama putri</div><div>🕌 Masjid / musala</div><div>📚 Perpustakaan</div><div>🍽️ Dapur &amp; kantin</div><div>🏫 Ruang belajar</div></div></div></section>
+<section><div class="c" style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center"><div><h3>Tertarik mondok di Riyadul Hikmah?</h3><p>Lihat syarat dan jadwal pendaftaran santri baru.</p></div><a class="btn" href="#ppdb">Daftar santri baru</a></div></section>
+</div></div>
+<div id="vAbs" style="display:none">
+<div class="card" id="lock" style="max-width:440px;margin:30px auto;text-align:center"><h2>Portal Admin</h2><p class="note" id="lp">Memuat…</p></div>
+<div id="adm" style="display:none"><div class="w">
+ <div class="hd"><div><h1>Absensi QR · Darul Hikmah</h1><p>MTs &amp; MA Darul Hikmah — Yayasan Riyadul Hikmah</p></div><div class="jam"><b id="jam">--.--.--</b><span id="tgl"></span></div></div>
+ <div class="tabs"><button class="tab on" data-t="scan">📷 Scan</button><button class="tab" data-t="rekap">📋 Rekap</button><button class="tab" data-t="siswa">👥 Siswa &amp; Kartu QR</button></div>
 
-        <!-- Footer -->
-        <footer class="bg-pesantren-900 text-gray-300 py-10 border-t-4 border-emas">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
-                <p>&copy; 2026 Yayasan Riyadul Hikmah Mekarrahayu. Sistem Informasi Manajemen Pesantren.</p>
-            </div>
-        </footer>
-    </div>
+ <section class="sec on" id="scan"><div class="card"><h2>Scan kartu siswa</h2>
+  <div class="row"><label>Batas jam masuk <input type="time" id="cut"></label><button class="btn p" id="go">Buka kamera</button><button class="btn" id="stop">Matikan</button></div>
+  <div id="reader"></div>
+  <div class="res" id="res"></div>
+  <form class="row" id="mf"><input id="mn" placeholder="Atau ketik NIS manual" style="flex:1"><button class="btn">Absen</button></form>
+  <p class="note">Siswa yang terlambat dari batas jam otomatis tercatat “Terlambat”. Satu siswa hanya bisa absen satu kali per hari.</p></div>
+  <div class="card"><h2>Absen hari ini</h2><div class="tw"><table><thead><tr><th>Jam</th><th>Nama</th><th>Kelas</th><th>Status</th></tr></thead><tbody id="hari"></tbody></table></div></div></section>
 
+ <section class="sec" id="rekap"><div class="card"><h2>Rekap kehadiran</h2>
+  <div class="row"><input type="date" id="rd"><select id="rk"></select><button class="btn" id="csv">Salin rekap (CSV)</button></div>
+  <div class="sum" id="sum"></div><textarea id="ta" readonly></textarea>
+  <div class="tw"><table><thead><tr><th>Nama</th><th>Kelas</th><th>Jam</th><th>Status</th></tr></thead><tbody id="rb"></tbody></table></div></div></section>
 
-    <!-- ========================================== -->
-    <!-- 2. TAMPILAN ADMIN (SISTEM OPENSID STYLE)   -->
-    <!-- ========================================== -->
-    <div id="view-admin" class="hidden fixed inset-0 z-50 bg-slate-100 flex h-screen overflow-hidden">
-        
-        <!-- Sidebar Admin -->
-        <aside class="w-64 bg-sidebar text-slate-300 flex flex-col h-full flex-shrink-0 transition-all duration-300 shadow-xl">
-            <div class="h-16 flex items-center px-4 bg-brand-900 border-b border-slate-700">
-                <div class="w-8 h-8 bg-brand-600 rounded flex items-center justify-center text-white font-bold mr-3 shadow-md">RH</div>
-                <div class="flex flex-col">
-                    <span class="text-white font-bold text-lg leading-tight tracking-wide">SIMP Admin</span>
-                    <span class="text-[10px] text-slate-400 uppercase tracking-wider">Riyadul Hikmah</span>
-                </div>
-            </div>
-            <div class="flex-1 overflow-y-auto py-4">
-                <div class="px-4 mb-2 text-xs font-semibold text-slate-500 uppercase tracking-wider">Modul Portal</div>
-                <nav class="space-y-1">
-                    <div class="bg-slate-800 text-white border-l-4 border-brand-500">
-                        <a href="#" class="flex items-center px-4 py-2.5 text-sm font-medium">
-                            <i class="fas fa-globe w-6 text-brand-500"></i> Admin Web
-                            <i class="fas fa-chevron-down ml-auto text-xs"></i>
-                        </a>
-                        <div class="bg-sidebar py-1">
-                            <a href="#" class="flex items-center pl-11 pr-4 py-2 text-sm text-white font-medium bg-slate-800/50">Artikel Berita</a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-            <div class="p-4 bg-slate-900 border-t border-slate-800 text-xs text-center text-slate-500">
-                Sistem Terpadu v1.0
-            </div>
-        </aside>
+ <section class="sec" id="siswa"><div class="card" id="imp"><h2>Impor dari Excel</h2><p class="note">File .xlsx atau .csv dengan kolom: Nama, NIS, Kelas, Unit (Unit boleh dikosongkan; otomatis dari kelas).</p><div class="row"><input type="file" id="xf" accept=".xlsx,.xls,.csv"><button class="btn p" id="xgo" style="display:none">Impor sekarang</button></div><div class="note" id="xs"></div></div>
+<div class="card" id="sfcard"><h2>Tambah siswa</h2>
+  <form class="row" id="sf"><input id="sn" placeholder="Nama lengkap" required style="flex:1"><input id="si" placeholder="NIS" required style="width:110px"><input id="sk" placeholder="Kelas (VII A)" required style="width:110px"><select id="su"><option>MTs</option><option>MA</option></select><button class="btn p">Tambah</button></form></div>
+  <div class="card"><div class="row" style="justify-content:space-between"><h2 style="margin:0">Kartu QR siswa</h2><button class="btn" onclick="window.print()">🖨️ Cetak</button></div><div class="kcards" id="kcards"></div></div></section>
+</div>
+</div></div>
+<footer id="kontak"><div class="w">
+ <div><b style="font-size:17px">Yayasan Riyadul Hikmah Mekarrahayu</b><p>Pondok Pesantren Riyadul Hikmah · PAUD Kober Al-Hasani</p><p>MTs Darul Hikmah · MA Darul Hikmah</p></div>
+ <div><p>📍 Alamat lengkap yayasan (isi di sini)</p><p>📞 08xx-xxxx-xxxx</p><p>✉ info@riyadulhikmah.example</p></div>
+</div></footer>
 
-        <!-- Main Content Admin -->
-        <div class="flex-1 flex flex-col h-full overflow-hidden">
-            <!-- Header Admin -->
-            <header class="h-16 bg-brand-600 text-white flex items-center justify-between px-4 shadow-md shrink-0">
-                <div class="flex items-center">
-                    <span class="text-lg font-bold"><i class="fas fa-tachometer-alt mr-2"></i> Dashboard</span>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <button onclick="tutupAdmin()" class="bg-amber-500 hover:bg-amber-600 text-white text-sm px-4 py-1.5 rounded-md transition shadow">
-                        <i class="fas fa-external-link-alt mr-1"></i> Lihat Web
-                    </button>
-                    <button onclick="logoutAdmin()" class="bg-red-600 hover:bg-red-700 text-white text-sm px-4 py-1.5 rounded-md transition shadow">
-                        <i class="fas fa-sign-out-alt mr-1"></i> Keluar
-                    </button>
-                </div>
-            </header>
-
-            <!-- Page Content (Scrollable) -->
-            <main class="flex-1 overflow-y-auto p-4 sm:p-6">
-                <!-- Breadcrumb -->
-                <div class="mb-6">
-                    <h1 class="text-2xl font-bold text-slate-800 flex items-center gap-3">
-                        Manajemen Kabar Pesantren
-                    </h1>
-                </div>
-
-                <!-- Stats Cards -->
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                    <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-lg bg-brand-100 text-brand-600 flex items-center justify-center text-2xl"><i class="fas fa-newspaper"></i></div>
-                        <div>
-                            <p class="text-xs font-semibold text-slate-500">Total Berita</p>
-                            <h3 class="text-2xl font-extrabold text-slate-800" id="stat-total">0</h3>
-                        </div>
-                    </div>
-                    <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl"><i class="fas fa-check-circle"></i></div>
-                        <div>
-                            <p class="text-xs font-semibold text-slate-500">Tampil Publik</p>
-                            <h3 class="text-2xl font-extrabold text-slate-800" id="stat-aktif">0</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Data Table Area -->
-                <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden flex flex-col">
-                    <div class="p-4 border-b border-slate-100 flex justify-between bg-slate-50/50">
-                        <button onclick="bukaModalForm()" class="bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold py-2 px-4 rounded-lg shadow-sm transition flex items-center">
-                            <i class="fas fa-plus mr-2"></i> Tambah Berita Baru
-                        </button>
-                    </div>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="bg-slate-50 border-b border-slate-200 text-xs font-semibold text-slate-500 uppercase">
-                                    <th class="p-3 w-12 text-center">No</th>
-                                    <th class="p-3">Judul Berita</th>
-                                    <th class="p-3 w-32 text-center">Status</th>
-                                    <th class="p-3 w-32">Kategori</th>
-                                    <th class="p-3 w-32">Tanggal</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tabel-berita-admin" class="divide-y divide-slate-100 text-sm text-slate-700">
-                                <tr>
-                                    <td colspan="5" class="p-8 text-center text-slate-400">Menarik data dari server...</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
-
-
-    <!-- ========================================== -->
-    <!-- MODAL POPUP LOGIN & FORM TAMBAH BERITA     -->
-    <!-- ========================================== -->
-    
-    <!-- Modal Login -->
-    <div id="modal-login" class="hidden fixed inset-0 bg-black bg-opacity-60 z-[60] flex items-center justify-center p-4 backdrop-blur-sm">
-        <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-sm relative border-t-4 border-emas">
-            <button onclick="tutupModalLogin()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-xl"><i class="fas fa-times"></i></button>
-            <div class="text-center mb-6">
-                <div class="w-14 h-14 bg-pesantren-800 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-3">RH</div>
-                <h3 class="text-xl font-bold text-gray-800">Login Administrator</h3>
-            </div>
-            <form id="form-login" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Username</label>
-                    <input type="text" id="username" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pesantren-500 outline-none">
-                </div>
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-1">Password</label>
-                    <input type="password" id="password" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pesantren-500 outline-none">
-                </div>
-                <div id="pesan-login" class="hidden text-red-500 text-xs font-bold text-center bg-red-50 p-2 rounded">Username atau password salah!</div>
-                <button type="submit" class="w-full bg-pesantren-800 hover:bg-pesantren-900 text-white font-bold py-2.5 px-4 rounded-lg transition flex items-center justify-center mt-2">
-                    <i class="fas fa-sign-in-alt mr-2"></i> Masuk Dashboard
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal Form Tambah Berita -->
-    <div id="modal-form-berita" class="hidden fixed inset-0 bg-slate-900/60 z-[70] flex items-center justify-center p-4 backdrop-blur-sm">
-        <div class="bg-white rounded-xl shadow-2xl w-full max-w-3xl flex flex-col max-h-full overflow-hidden border-t-4 border-brand-600">
-            <div class="flex justify-between items-center p-5 border-b border-slate-100 bg-slate-50">
-                <h3 class="text-lg font-bold text-slate-800"><i class="fas fa-edit text-brand-600 mr-2"></i> Tambah Berita Baru</h3>
-                <button onclick="tutupModalForm()" class="text-slate-400 hover:text-slate-700"><i class="fas fa-times text-xl"></i></button>
-            </div>
-            <div class="p-6 overflow-y-auto">
-                <form id="form-tambah" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">Tanggal Publikasi</label>
-                            <input type="date" id="input-tgl" required class="w-full text-sm border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-brand-500 outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 mb-1">Kategori</label>
-                            <select id="input-kategori" required class="w-full text-sm border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-brand-500 outline-none">
-                                <option value="Pengumuman">Pengumuman</option>
-                                <option value="Kegiatan">Kegiatan</option>
-                                <option value="Prestasi">Prestasi</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Judul Berita</label>
-                        <input type="text" id="input-judul" required class="w-full text-sm border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-brand-500 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">URL Gambar (Opsional)</label>
-                        <input type="url" id="input-gambar" placeholder="https://..." class="w-full text-sm border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-brand-500 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold text-slate-700 mb-1">Isi Berita</label>
-                        <textarea id="input-isi" required rows="4" class="w-full text-sm border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-brand-500 outline-none"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="p-5 border-t border-slate-100 flex items-center justify-between bg-slate-50">
-                <div id="pesan-notif" class="text-sm font-semibold hidden"></div>
-                <div class="flex gap-2 ml-auto">
-                    <button type="button" onclick="tutupModalForm()" class="px-4 py-2 border border-slate-300 text-sm font-semibold rounded-lg hover:bg-slate-100">Batal</button>
-                    <button type="submit" form="form-tambah" id="btn-simpan" class="px-5 py-2 bg-brand-600 text-white text-sm font-semibold rounded-lg hover:bg-brand-700 flex items-center">
-                        <i class="fas fa-save mr-2"></i> Simpan
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- ========================================== -->
-    <!-- SCRIPT (LOGIKA UTAMA) -->
-    <!-- ========================================== -->
-    <script>
-        // API URL (SESUAI GAMBAR ANDA)
-        const API_URL = 'https://script.google.com/macros/s/AKfycbwyRkWMvvK--xxTkcKQEf8mQglS8YZthZE4t1nfyVee6tYrBriWDshtwmBzIh1kD8vJ/exec'; 
-
-        // ELEMEN & FUNGSI TOGGLE
-        const viewPublik = document.getElementById('view-publik');
-        const viewAdmin = document.getElementById('view-admin');
-        const modalLogin = document.getElementById('modal-login');
-        const modalForm = document.getElementById('modal-form-berita');
-
-        function bukaModalLogin() { modalLogin.classList.remove('hidden'); modalLogin.classList.add('flex'); }
-        function tutupModalLogin() { modalLogin.classList.add('hidden'); modalLogin.classList.remove('flex'); }
-        
-        function bukaModalForm() { 
-            modalForm.classList.remove('hidden'); 
-            modalForm.classList.add('flex');
-            document.getElementById('input-tgl').valueAsDate = new Date();
-        }
-        function tutupModalForm() { 
-            modalForm.classList.add('hidden'); 
-            modalForm.classList.remove('flex');
-            document.getElementById('form-tambah').reset();
-            document.getElementById('pesan-notif').classList.add('hidden');
-        }
-
-        // FUNGSI LOGIN ADMIN (User: admin | Pass: pesantren2026)
-        document.getElementById('form-login').addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (document.getElementById('username').value === 'admin' && document.getElementById('password').value === 'pesantren2026') {
-                sessionStorage.setItem('isAdmin', 'true');
-                document.getElementById('password').value = '';
-                tutupModalLogin();
-                bukaAdmin();
-            } else {
-                document.getElementById('pesan-login').classList.remove('hidden');
-            }
-        });
-
-        function bukaAdmin() {
-            // Sembunyikan web publik, munculkan dashboard full screen
-            viewPublik.classList.replace('block', 'hidden');
-            viewAdmin.classList.replace('hidden', 'flex');
-        }
-
-        function tutupAdmin() {
-            // Sembunyikan dashboard, kembali ke web publik
-            viewAdmin.classList.replace('flex', 'hidden');
-            viewPublik.classList.replace('hidden', 'block');
-        }
-
-        function logoutAdmin() {
-            sessionStorage.removeItem('isAdmin');
-            tutupAdmin();
-        }
-
-        // CEK SESI LOGIN SAAT HALAMAN DIMUAT
-        if (sessionStorage.getItem('isAdmin') === 'true') {
-            bukaAdmin();
-        }
-
-        // FUNGSI AMBIL DATA BERITA (Untuk Publik dan Admin)
-        async function muatBeritaUtama() {
-            const wadahPublik = document.getElementById('wadah-berita-publik');
-            const tabelAdmin = document.getElementById('tabel-berita-admin');
-
-            try {
-                const response = await fetch(API_URL + '?t=' + new Date().getTime());
-                const json = await response.json();
-                
-                if (json.status === 'success') {
-                    const data = json.data;
-                    
-                    // Update Statistik Admin
-                    document.getElementById('stat-total').textContent = data.length;
-                    document.getElementById('stat-aktif').textContent = data.length;
-
-                    wadahPublik.innerHTML = '';
-                    tabelAdmin.innerHTML = '';
-
-                    if(data.length === 0) {
-                        wadahPublik.innerHTML = '<div class="col-span-full text-center text-gray-500 py-10">Belum ada berita.</div>';
-                        tabelAdmin.innerHTML = '<tr><td colspan="5" class="p-8 text-center text-slate-400">Belum ada data berita.</td></tr>';
-                        return;
-                    }
-
-                    // 1. RENDER KARTU PUBLIK (Max 3 Terbaru)
-                    const dataPublik = data.slice(0, 3);
-                    dataPublik.forEach(item => {
-                        let warnaLabel = 'bg-pesantren-600';
-                        if(item.Kategori === 'Kegiatan') warnaLabel = 'bg-emas';
-                        if(item.Kategori === 'Prestasi') warnaLabel = 'bg-blue-600';
-                        
-                        let tglStr = item.Tanggal;
-                        try { tglStr = new Date(item.Tanggal).toLocaleDateString('id-ID', {day:'numeric', month:'long', year:'numeric'}); } catch(e){}
-
-                        wadahPublik.innerHTML += `
-                        <div class="bg-white rounded-lg overflow-hidden shadow border border-gray-200 flex flex-col h-full hover:shadow-lg transition">
-                            <div class="h-48 bg-gray-200 relative overflow-hidden group">
-                                <img src="${item.URL_Gambar}" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110" onerror="this.src='https://via.placeholder.com/400x250?text=RH'">
-                                <span class="absolute top-4 left-4 ${warnaLabel} text-white text-xs font-bold px-3 py-1 rounded shadow-sm z-10">${item.Kategori}</span>
-                            </div>
-                            <div class="p-5 flex flex-col flex-grow">
-                                <div class="text-xs text-gray-500 mb-2"><i class="far fa-calendar-alt mr-1"></i> ${tglStr}</div>
-                                <h3 class="font-bold text-lg mb-2 line-clamp-2 text-gray-800">${item.Judul}</h3>
-                                <p class="text-gray-600 text-sm line-clamp-3 mb-4">${item.Isi_Berita}</p>
-                                <a href="#" class="mt-auto text-pesantren-600 font-bold text-sm hover:text-emas transition">Baca selengkapnya &rarr;</a>
-                            </div>
-                        </div>`;
-                    });
-
-                    // 2. RENDER TABEL ADMIN (Semua Data)
-                    data.forEach((item, index) => {
-                        let tglStr = item.Tanggal;
-                        try { tglStr = new Date(item.Tanggal).toLocaleDateString('id-ID', {day:'2-digit', month:'short', year:'numeric'}); } catch(e){}
-                        
-                        let bgKategori = 'bg-slate-100 text-slate-700';
-                        if(item.Kategori === 'Pengumuman') bgKategori = 'bg-blue-100 text-blue-700';
-                        if(item.Kategori === 'Kegiatan') bgKategori = 'bg-amber-100 text-amber-700';
-                        if(item.Kategori === 'Prestasi') bgKategori = 'bg-emerald-100 text-emerald-700';
-
-                        tabelAdmin.innerHTML += `
-                        <tr class="hover:bg-slate-50 transition">
-                            <td class="p-3 text-center font-medium">${index + 1}</td>
-                            <td class="p-3 font-bold text-slate-800">${item.Judul}</td>
-                            <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">Aktif</span></td>
-                            <td class="p-3"><span class="px-2 py-1 rounded text-[10px] font-bold uppercase ${bgKategori}">${item.Kategori}</span></td>
-                            <td class="p-3 text-xs text-slate-500 whitespace-nowrap"><i class="far fa-calendar-alt mr-1"></i> ${tglStr}</td>
-                        </tr>`;
-                    });
-
-                }
-            } catch (error) {
-                console.error("Gagal memuat:", error);
-            }
-        }
-
-        // FUNGSI SIMPAN BERITA (POST)
-        document.getElementById('form-tambah').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const btnSimpan = document.getElementById('btn-simpan');
-            const notif = document.getElementById('pesan-notif');
-            
-            const dataBaru = {
-                Tanggal: document.getElementById('input-tgl').value,
-                Kategori: document.getElementById('input-kategori').value,
-                Judul: document.getElementById('input-judul').value,
-                URL_Gambar: document.getElementById('input-gambar').value || 'https://via.placeholder.com/400x250?text=Kabar',
-                Isi_Berita: document.getElementById('input-isi').value
-            };
-
-            btnSimpan.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Menyimpan...';
-            btnSimpan.disabled = true;
-            notif.classList.add('hidden');
-
-            try {
-                const response = await fetch(API_URL, { method: 'POST', body: JSON.stringify(dataBaru) });
-                const result = await response.json();
-                
-                if (result.status === 'success') {
-                    notif.textContent = 'Berhasil disimpan!';
-                    notif.className = 'text-sm font-semibold text-green-600';
-                    notif.classList.remove('hidden');
-                    
-                    muatBeritaUtama(); // Refresh berita publik dan admin
-                    setTimeout(() => tutupModalForm(), 1000); // Tutup popup
-                } else {
-                    throw new Error(result.message);
-                }
-            } catch (error) {
-                notif.textContent = 'Gagal menyimpan. Cek API!';
-                notif.className = 'text-sm font-semibold text-red-600';
-                notif.classList.remove('hidden');
-            } finally {
-                btnSimpan.innerHTML = '<i class="fas fa-save mr-2"></i> Simpan Data';
-                btnSimpan.disabled = false;
-            }
-        });
-
-        // Jalankan fetch pertama kali
-        document.addEventListener('DOMContentLoaded', muatBeritaUtama);
-    </script>
+<script>
+var $=function(i){return document.getElementById(i)};
+var ST=[["186","Santri pesantren"],["520","Total santri &amp; siswa"],["4","Unit pendidikan"],["64","Tenaga pengajar"]];
+$("stats").innerHTML=ST.map(function(s){return '<div class="stat"><b>'+s[0]+'</b><span>'+s[1]+'</span></div>'}).join("");
+var U=[["Pondok Pesantren Riyadul Hikmah","Tahfidz, kajian kitab, dan pembinaan akhlak.","★ Unggulan"],["PAUD Kober Al-Hasani","Pendidikan anak usia dini berbasis nilai Islami.","PAUD"],["MTs Darul Hikmah","Madrasah Tsanawiyah setingkat SMP.","MTs"],["MA Darul Hikmah","Madrasah Aliyah setingkat SMA.","MA"]];
+$("units").innerHTML=U.map(function(u){return '<div class="c"><small>'+u[2]+'</small><h3>'+u[0]+'</h3><p>'+u[1]+'</p></div>'}).join("");
+var N=[["Penerimaan santri baru dibuka","Informasi syarat dan jadwal pendaftaran."],["Khataman Al-Qur’an santri","Kegiatan khataman bersama pengasuh dan wali santri."],["Pentas seni PAUD Al-Hasani","Anak-anak tampil dalam acara akhir semester."]];
+$("news").innerHTML=N.map(function(n){return '<div class="c"><div class="im"></div><h3>'+n[0]+'</h3><p>'+n[1]+'</p></div>'}).join("");
+var d=new Date(),h=d.getHours()+d.getMinutes()/60,w=d.getDay(),b=w>0&&h>=7.5&&h<15;
+$("st").textContent=b?"Kantor buka":"Kantor tutup";$("st").className="st"+(b?" buka":"");
+function rute(){var h=(location.hash||"#beranda").slice(1),p=h=="pesantren",a=h=="absen";$("vHome").style.display=(p||a)?"none":"";$("vPes").style.display=p?"block":"none";$("vAbs").style.display=a?"block":"none";var e=$(h);if(!p&&!a&&e&&h!="beranda")e.scrollIntoView();else scrollTo(0,0)}
+addEventListener("hashchange",rute);rute();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+var db=null,adm=false,wr=true,S=[],A={},CUT="07:15",un={},pend=[];
+var NM={H:"Hadir",T:"Terlambat",I:"Izin",S:"Sakit",A:"Alpa"};
+function p2(n){return(n<10?"0":"")+n}
+function tgl(){var d=new Date();return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function cari(i){return S.filter(function(x){return x.i==i})[0]}
+function unit(k){var r=String(k).trim().split(/[\s-]/)[0].toUpperCase();return["X","XI","XII","10","11","12"].indexOf(r)>-1?"MA":"MTs"}
+function tab(t){document.querySelectorAll("#vAbs .sec").forEach(function(s){s.classList.toggle("on",s.id==t)});document.querySelectorAll("#vAbs .tab").forEach(function(b){b.classList.toggle("on",b.dataset.t==t)});if(t=="rekap")rekap();if(t=="siswa")kartu();if(t=="scan")hari()}
+document.querySelectorAll("#vAbs .tab").forEach(function(b){b.onclick=function(){tab(b.dataset.t)}});
+function tampil(c,m){var r=$("res");r.className="res "+c;r.textContent=m}
+function sub(k,d){if(!db)return;if(un[k])un[k]();un[k]=db.collection("absen").where("d","==",d).onSnapshot(function(s){var m={};s.docs.forEach(function(x){var v=x.data();m[v.i]=v});A[d]=m;if(d==tgl())hari();if(d==$("rd").value)rekap()},function(){})}
+function proses(nis){var x=cari(nis);if(!x){tampil("er","NIS "+nis+" tidak ditemukan");return}
+ var d=tgl(),a=(A[d]||{})[nis];if(a){tampil("wr",x.n+" sudah absen pukul "+a.t);return}
+ var n=new Date(),t=p2(n.getHours())+":"+p2(n.getMinutes()),s=t<=CUT?"H":"T";
+ db.doc("absen/"+d+"_"+nis).set({d:d,i:nis,s:s,t:t}).then(function(){tampil(s=="H"?"ok":"wr",x.n+" ("+x.k+") — "+NM[s]+" "+t)}).catch(function(){tampil("er","Gagal menyimpan. Anda mungkin tidak punya izin mencatat absen.")})}
+var last="",lt=0;
+function onCode(txt){var n=Date.now();if(txt==last&&n-lt<3000)return;last=txt;lt=n;if(txt.indexOf("RH:")==0)proses(txt.slice(3));else tampil("er","QR tidak dikenali")}
+var sc=null;
+$("go").onclick=function(){try{if(!sc)sc=new Html5Qrcode("reader");sc.start({facingMode:"environment"},{fps:10,qrbox:220},onCode).catch(function(){tampil("er","Kamera tidak bisa dibuka. Izinkan akses kamera, atau gunakan input NIS manual.")})}catch(e){tampil("er","Pemindai belum siap, muat ulang halaman.")}};
+$("stop").onclick=function(){if(sc)sc.stop().catch(function(){})};
+$("mf").onsubmit=function(e){e.preventDefault();var v=$("mn").value.trim();if(v)proses(v);$("mn").value=""};
+$("cut").onchange=function(){CUT=this.value;if(adm&&db)db.doc("pengaturan/cut").set({v:CUT})};
+function hari(){var d=A[tgl()]||{},r=Object.keys(d).map(function(i){return[i,d[i]]}).sort(function(a,b){return b[1].t<a[1].t?-1:1});
+ $("hari").innerHTML=r.map(function(p){var x=cari(p[0])||{n:p[0],k:"-"};return '<tr><td>'+p[1].t+'</td><td>'+esc(x.n)+'</td><td>'+esc(x.k)+'</td><td class="s-'+p[1].s+'">'+NM[p[1].s]+'</td></tr>'}).join("")||'<tr><td colspan="4">Belum ada yang absen.</td></tr>'}
+$("rd").value=tgl();
+function kls(){var k=[];S.forEach(function(x){if(k.indexOf(x.k)<0)k.push(x.k)});var v=$("rk").value;$("rk").innerHTML='<option value="">Semua kelas</option>'+k.map(function(c){return '<option>'+esc(c)+'</option>'}).join("");$("rk").value=v}
+function rekap(){kls();var d=A[$("rd").value]||{},k=$("rk").value,L=S.filter(function(x){return!k||x.k==k}),c={H:0,T:0,I:0,S:0,A:0};
+ var rows=L.map(function(x){var a=d[x.i],s=a?a.s:"A";c[s]++;return{x:x,s:s,t:a?a.t:"-"}});
+ $("sum").innerHTML=Object.keys(NM).map(function(s){return '<div>'+NM[s]+'<b>'+c[s]+'</b></div>'}).join("");
+ $("rb").innerHTML=rows.map(function(r){return '<tr><td>'+esc(r.x.n)+'</td><td>'+esc(r.x.k)+'</td><td>'+r.t+'</td><td><select data-i="'+esc(r.x.i)+'" class="s-'+r.s+'"'+(wr?"":" disabled")+'>'+Object.keys(NM).map(function(s){return '<option value="'+s+'"'+(s==r.s?" selected":"")+'>'+NM[s]+'</option>'}).join("")+'</select></td></tr>'}).join("")||'<tr><td colspan="4">Belum ada siswa. Impor dari Excel di tab Siswa.</td></tr>';
+ window._rows=rows}
+$("rd").onchange=function(){sub("rek",this.value);rekap()};$("rk").onchange=rekap;
+$("rb").onchange=function(e){var i=e.target.dataset.i,dt=$("rd").value,s=e.target.value;if(!i||!db)return;var r=db.doc("absen/"+dt+"_"+i);var p=s=="A"?r.delete():r.set({d:dt,i:i,s:s,t:((A[dt]||{})[i]||{}).t||"-"});p.catch(function(){alert("Gagal menyimpan perubahan")})};
+$("csv").onclick=function(){var t=$("ta");var o="Nama,Kelas,Jam,Status\n"+(window._rows||[]).map(function(r){return[r.x.n,r.x.k,r.t,NM[r.s]].join(",")}).join("\n");t.value=o;t.style.display="block";t.select();try{navigator.clipboard.writeText(o)}catch(e){}};
+function kartu(){var c=$("kcards");c.innerHTML=S.map(function(x,n){return '<div class="kt"><b>'+esc(x.n)+'</b><small>'+esc(x.u)+' · '+esc(x.k)+' · NIS '+esc(x.i)+'</small><div class="q" id="q'+n+'"></div>'+(adm?'<button class="btn" data-d="'+esc(x.i)+'">Hapus</button>':'')+'</div>'}).join("")||'<p class="note">Belum ada siswa.</p>';
+ S.forEach(function(x,n){try{new QRCode($("q"+n),{text:"RH:"+x.i,width:110,height:110})}catch(e){}})}
+$("kcards").onclick=function(e){var i=e.target.dataset.d;if(i&&db&&confirm("Hapus siswa ini?"))db.doc("siswa/"+i).delete().catch(function(){alert("Gagal menghapus")})};
+$("sf").onsubmit=function(e){e.preventDefault();var i=$("si").value.trim().replace(/[\/\s]/g,"");if(!i)return;if(cari(i)){alert("NIS sudah dipakai");return}var f=this;db.doc("siswa/"+i).set({n:$("sn").value.trim(),i:i,k:$("sk").value.trim(),u:$("su").value}).then(function(){f.reset()}).catch(function(){alert("Gagal menyimpan. Hanya admin yang boleh menambah siswa.")})};
+$("xf").onchange=function(){var f=this.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var wb=XLSX.read(r.result,{type:"array"}),rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,defval:""});
+ var h=rows[0].map(function(c){return String(c).toLowerCase()}),hasH=h.some(function(c){return c.indexOf("nama")>-1}),cn=0,ci=1,ck=2,cu=3;
+ if(hasH){var ix=function(k,d){var j=h.findIndex(function(c){return c.indexOf(k)>-1});return j>-1?j:d};cn=ix("nama",0);ci=ix("nis",1);ck=ix("kelas",2);cu=ix("unit",3);rows=rows.slice(1)}
+ pend=rows.map(function(r){var k=String(r[ck]||"").trim(),u=String(r[cu]||"").trim().toUpperCase();return{n:String(r[cn]||"").trim(),i:String(r[ci]||"").replace(/[\/\s]/g,""),k:k,u:u=="MA"?"MA":u=="MTS"?"MTs":unit(k)}}).filter(function(x){return x.n&&x.i});
+ $("xs").textContent=pend.length+" siswa terbaca dari "+f.name+".";$("xgo").style.display=pend.length?"inline-block":"none"}catch(e){$("xs").textContent="File tidak bisa dibaca. Pastikan format .xlsx atau .csv.";pend=[]}};r.readAsArrayBuffer(f)};
+$("xgo").onclick=async function(){var b=this,n=0;b.disabled=true;try{for(var k=0;k<pend.length;k++){await db.doc("siswa/"+pend[k].i).set(pend[k]);n++;$("xs").textContent="Mengimpor "+n+"/"+pend.length+"…"}$("xs").textContent="Selesai: "+n+" siswa diimpor.";pend=[];b.style.display="none"}catch(e){$("xs").textContent="Berhenti di "+n+" siswa. Hanya admin yang boleh mengimpor."}b.disabled=false};
+function detak(){var d=new Date();$("jam").textContent=p2(d.getHours())+"."+p2(d.getMinutes())+"."+p2(d.getSeconds());$("tgl").textContent=d.toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}
+detak();setInterval(detak,1000);
+async function init(){var u=null;
+ try{if(window.claude){db=await claude.use("db");u=await claude.use("user")}}catch(e){}
+ if(!db){$("lp").textContent="Portal Admin memerlukan login akun Claude dan izin dari pemilik website. Buka lewat tautan yang dibagikan kepada Anda, lalu masuk.";return}
+ try{adm=!!(u&&await u.canEdit());var w=u?await u.can("data.write"):null;wr=adm||w!==false}catch(e){}
+ $("lock").style.display="none";$("adm").style.display="block";
+ if(!adm){$("imp").style.display="none";$("sfcard").style.display="none";$("cut").disabled=true}
+ db.collection("siswa").onSnapshot(function(s){S=s.docs.map(function(x){return x.data()}).sort(function(a,b){return a.k+a.n<b.k+b.n?-1:1});kartu();rekap();hari()},function(){});
+ db.doc("pengaturan/cut").onSnapshot(function(d){if(d.exists){CUT=d.data().v||CUT;$("cut").value=CUT}},function(){});
+ sub("hari",tgl());sub("rek",$("rd").value)}
+$("cut").value=CUT;init();
+})();
+</script>
 </body>
 </html>

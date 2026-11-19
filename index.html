@@ -882,46 +882,72 @@
       </div>
 
       <!-- TAB 3: SCAN QR ABSENSI -->
-      <div id="tab-absensi" class="space-y-6 hidden">
-        <div class="flex flex-wrap items-center justify-between gap-4">
+      <div id="tab-absensi" class="space-y-5 hidden">
+        <div>
+          <h1 class="text-2xl font-extrabold text-slate-900">Absensi QR Code</h1>
+          <p class="text-xs text-slate-500">1) Pilih jenis absen &nbsp; 2) Arahkan kartu QR siswa ke kamera. Tersimpan otomatis.</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 sm:gap-3">
+          <button id="mode-masuk" type="button" onclick="setScanMode('masuk')" class="py-3.5 rounded-2xl text-sm sm:text-base font-extrabold border transition">🟢 Masuk</button>
+          <button id="mode-pulang" type="button" onclick="setScanMode('pulang')" class="py-3.5 rounded-2xl text-sm sm:text-base font-extrabold border transition">🏠 Pulang</button>
+          <button id="mode-mapel" type="button" onclick="setScanMode('mapel')" class="py-3.5 rounded-2xl text-sm sm:text-base font-extrabold border transition">📚 Per Mapel</button>
+        </div>
+
+        <div id="mapel-panel" class="hidden bg-sky-50 border border-sky-200 p-4 rounded-2xl grid sm:grid-cols-2 gap-3">
           <div>
-            <h1 class="text-2xl font-extrabold text-slate-900">Absensi Digital Kamera QR Code</h1>
-            <p class="text-xs text-slate-500">Arahkan kartu QR siswa ke kamera. Hasil otomatis tersimpan ke database.</p>
+            <label class="block text-xs font-bold text-sky-900 mb-1">Kelas</label>
+            <select id="scan-kelas" onchange="saveMapelSettings()" class="w-full rounded-xl border border-sky-300 bg-white px-3 py-2.5 text-sm font-medium"><option value="">Semua kelas</option></select>
           </div>
-          <div class="flex flex-wrap gap-2">
-            <button id="btn-scan-start" type="button" onclick="startQRScanner()" class="bg-emerald-700 hover:bg-emerald-800 text-white text-sm font-bold px-5 py-2.5 rounded-xl shadow">Aktifkan Kamera Scanner</button>
-            <button id="btn-scan-switch" type="button" onclick="switchCamera()" class="hidden bg-white border border-slate-300 text-slate-700 text-sm font-bold px-4 py-2.5 rounded-xl">Ganti Kamera</button>
-            <button id="btn-scan-stop" type="button" onclick="stopQRScanner()" class="hidden bg-red-100 hover:bg-red-200 text-red-700 text-sm font-bold px-4 py-2.5 rounded-xl">Matikan Kamera</button>
+          <div>
+            <label class="block text-xs font-bold text-sky-900 mb-1">Mata Pelajaran</label>
+            <input id="scan-mapel" list="mapel-options" oninput="saveMapelSettings()" placeholder="Pilih atau ketik mapel" class="w-full rounded-xl border border-sky-300 bg-white px-3 py-2.5 text-sm font-medium">
+            <datalist id="mapel-options"></datalist>
           </div>
         </div>
 
-        <div class="grid lg:grid-cols-12 gap-6">
-          <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+        <div class="grid lg:grid-cols-12 gap-5">
+          <div class="lg:col-span-5 bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200">
             <div id="qr-reader" class="w-full rounded-xl overflow-hidden bg-slate-900 min-h-[260px]"></div>
-            <div id="scan-feedback" class="mt-4 p-3.5 rounded-xl bg-slate-100 text-xs text-slate-600 text-center font-medium">
-              Menunggu pemindaian kartu pelajar...
-            </div>
+            <button id="btn-scan-start" type="button" onclick="startQRScanner()" class="mt-3 w-full bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold py-3 rounded-xl">Aktifkan Kamera</button>
+            <div id="scan-feedback" class="mt-3 p-4 rounded-2xl text-center bg-slate-100 text-slate-600"></div>
             <div id="qr-file-temp" class="hidden"></div>
-            <div class="mt-4 pt-4 border-t border-slate-100 space-y-2.5">
-              <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wide">Cadangan jika kamera bermasalah</p>
-              <form onsubmit="submitManualNisn(event)" class="flex gap-2">
-                <input id="manual-nisn" type="text" inputmode="numeric" placeholder="Ketik NISN lalu Catat" class="flex-1 min-w-0 border border-slate-300 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-emerald-600">
-                <button type="submit" class="bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold px-4 py-2 rounded-xl">Catat</button>
-              </form>
-              <label class="block cursor-pointer text-center text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 rounded-xl px-3 py-2">
-                Scan dari foto / gambar QR
-                <input type="file" accept="image/*" onchange="scanQRFromFile(event)" class="hidden">
-              </label>
-            </div>
+            <details class="mt-3 text-xs">
+              <summary class="cursor-pointer font-bold text-slate-500">Kamera bermasalah? Pilihan cadangan</summary>
+              <div class="mt-3 space-y-2.5">
+                <form onsubmit="submitManualNisn(event)" class="flex gap-2">
+                  <input id="manual-nisn" type="text" inputmode="numeric" placeholder="Ketik NISN lalu Catat" class="flex-1 min-w-0 border border-slate-300 rounded-xl px-3 py-2 text-xs">
+                  <button type="submit" class="bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-xl">Catat</button>
+                </form>
+                <label class="block cursor-pointer text-center font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-xl px-3 py-2">Scan dari foto QR<input type="file" accept="image/*" onchange="scanQRFromFile(event)" class="hidden"></label>
+                <div class="flex gap-2">
+                  <button id="btn-scan-switch" type="button" onclick="switchCamera()" class="flex-1 bg-white border border-slate-300 text-slate-700 font-bold py-2 rounded-xl">Ganti Kamera</button>
+                  <button id="btn-scan-stop" type="button" onclick="stopQRScanner()" class="flex-1 bg-red-100 text-red-700 font-bold py-2 rounded-xl">Matikan Kamera</button>
+                </div>
+              </div>
+            </details>
           </div>
-          <div class="lg:col-span-7 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="font-bold text-slate-800">Log Kehadiran Hari Ini</h3>
-              <button onclick="switchAdminTab('rekap')" class="text-xs font-bold text-emerald-700 hover:underline">Lihat Rekap &amp; Ekspor Excel →</button>
+          <div class="lg:col-span-7 bg-white p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+              <h3 class="font-bold text-slate-800">Log Hari Ini</h3>
+              <button onclick="switchAdminTab('rekap')" class="text-xs font-bold text-emerald-700 hover:underline">Rekap &amp; Excel →</button>
             </div>
-            <div id="attendance-log" class="space-y-2.5 max-h-80 overflow-y-auto text-sm"><p class="text-xs text-slate-400 italic">Belum ada siswa yang melakukan scan hari ini.</p></div>
+            <div class="flex flex-wrap gap-2 mb-3 text-[11px] font-bold">
+              <span class="px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800">Masuk: <b id="cnt-masuk">0</b></span>
+              <span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-800">Pulang: <b id="cnt-pulang">0</b></span>
+              <span class="px-2.5 py-1 rounded-full bg-sky-100 text-sky-800">Mapel: <b id="cnt-mapel">0</b></span>
+            </div>
+            <div id="attendance-log" class="space-y-2 max-h-96 overflow-y-auto text-sm"></div>
           </div>
         </div>
+
+        <details class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-xs text-amber-900">
+          <summary class="cursor-pointer font-bold">Setup database (sekali saja) untuk fitur Pulang &amp; Mapel</summary>
+          <p class="mt-2">Buka Supabase &rarr; SQL Editor, jalankan:</p>
+          <pre class="mt-2 bg-white border border-amber-200 rounded-xl p-3 overflow-x-auto select-all">alter table attendances add column if not exists jenis text default 'masuk';
+alter table attendances add column if not exists mapel text;
+update attendances set jenis = 'masuk' where jenis is null;</pre>
+        </details>
       </div>
 
       <!-- TAB 4: REKAP ABSENSI & EKSPOR EXCEL -->
@@ -935,7 +961,7 @@
             📥 Unduh Laporan Excel (.xlsx)
           </button>
         </div>
-        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 grid sm:grid-cols-3 gap-4 items-end">
+        <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
           <div>
             <label class="block text-xs font-bold text-slate-700 mb-1">Periode Rekap</label>
             <select id="filter-periode" onchange="renderRekapTable()" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm font-medium">
@@ -952,6 +978,15 @@
               <option value="MTs">Khusus MTs Darul Hikmah</option>
               <option value="MA">Khusus MA</option>
             </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Jenis Absen</label>
+            <select id="filter-jenis-rekap" onchange="renderRekapTable()" class="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm font-medium">
+              <option value="masuk">Kehadiran Masuk</option>
+              <option value="pulang">Kehadiran Pulang</option>
+              <option value="mapel">Per Mata Pelajaran</option>
+            </select>
+            <select id="filter-mapel-rekap" onchange="renderRekapTable()" class="hidden mt-2 w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm font-medium"><option value="">Semua mapel</option></select>
           </div>
           <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs text-emerald-900">
             <span class="block font-bold">Total Catatan Kehadiran:</span>
@@ -2075,7 +2110,7 @@
       document.getElementById('tab-' + tabName).classList.remove('hidden');
       document.getElementById('nav-' + tabName).classList.add('bg-emerald-800', 'text-white');
       sessionStorage.setItem('dh_admin_active_tab', tabName);
-      if (tabName !== 'absensi') stopQRScanner();
+      if (tabName !== 'absensi') stopQRScanner(); else initAbsensiTab();
       if (tabName === 'rekap') renderRekapTable();
     }
 
@@ -2101,7 +2136,7 @@
 
       document.getElementById('stat-mts').innerText = students.filter(s => s.jenjang === 'MTs').length;
       document.getElementById('stat-ma').innerText = students.filter(s => s.jenjang === 'MA').length;
-      document.getElementById('stat-hadir').innerText = todayAttendances.length;
+      document.getElementById('stat-hadir').innerText = new Set(todayAttendances.filter(a => jenisOf(a) === 'masuk').map(a => a.nisn)).size;
       document.getElementById('stat-ppdb').innerText = ppdbList.length;
 
       renderStudentsTable('ALL');
@@ -2114,6 +2149,7 @@
       renderAdminDocsGrid();
       renderAdminEkskulGrid();
       populateSettingsForms();
+      populateKelasOptions();
     }
 
     // ==================== CRUD SISWA ====================
@@ -2614,137 +2650,105 @@
       }
     }
 
-    // ==================== ABSENSI QR & REKAP EXCEL ====================
-    function renderAttendanceLog(list) {
-      const log = document.getElementById('attendance-log');
-      if (!list || list.length === 0) {
-        log.innerHTML = '<p class="text-xs text-slate-400 italic">Belum ada siswa yang melakukan scan hari ini.</p>';
-        return;
+    // ==================== ABSENSI QR (MASUK / PULANG / MAPEL) & REKAP ====================
+    const JENIS_LABEL = { masuk: 'Masuk', pulang: 'Pulang', mapel: 'Mapel' };
+    const DEFAULT_MAPEL = ["Al-Qur'an Hadits", 'Akidah Akhlak', 'Fikih', 'SKI', 'Bahasa Arab', 'Bahasa Indonesia', 'Bahasa Inggris', 'Matematika', 'IPA', 'IPS', 'PPKn', 'Informatika', 'PJOK', 'Seni Budaya', 'Nahwu', 'Shorof', 'Tahfidz'];
+    let scanMode = 'masuk';
+
+    function jenisOf(a) { return (a && a.jenis) || 'masuk'; }
+
+    function getMapelList() {
+      let saved = [];
+      try { saved = JSON.parse(localStorage.getItem('dh_mapel_list') || '[]'); } catch (e) {}
+      const fromDb = allAttendances.map(a => a.mapel).filter(Boolean);
+      return [...new Set([...DEFAULT_MAPEL, ...saved, ...fromDb])].sort((x, y) => x.localeCompare(y, 'id'));
+    }
+    function rememberMapel(name) {
+      try {
+        const saved = JSON.parse(localStorage.getItem('dh_mapel_list') || '[]');
+        if (!saved.includes(name)) { saved.push(name); localStorage.setItem('dh_mapel_list', JSON.stringify(saved)); }
+      } catch (e) {}
+    }
+    function populateKelasOptions() {
+      const sel = document.getElementById('scan-kelas');
+      if (!sel) return;
+      const keep = sel.value || localStorage.getItem('dh_scan_kelas') || '';
+      const kelas = [...new Set(students.map(s => String(s.kelas || '').trim()).filter(Boolean))].sort((x, y) => x.localeCompare(y, 'id', { numeric: true }));
+      sel.innerHTML = '<option value="">Semua kelas</option>' + kelas.map(k => `<option value="${esc(k)}">${esc(k)}</option>`).join('');
+      sel.value = kelas.includes(keep) ? keep : '';
+      const dl = document.getElementById('mapel-options');
+      if (dl) dl.innerHTML = getMapelList().map(m => `<option value="${esc(m)}"></option>`).join('');
+    }
+    function saveMapelSettings() {
+      try {
+        localStorage.setItem('dh_scan_kelas', document.getElementById('scan-kelas').value);
+        localStorage.setItem('dh_scan_mapel', document.getElementById('scan-mapel').value);
+      } catch (e) {}
+      showIdleFeedback();
+    }
+
+    function modeDescription() {
+      if (scanMode === 'mapel') {
+        const m = (document.getElementById('scan-mapel').value || '').trim();
+        const k = document.getElementById('scan-kelas').value;
+        return m ? `Absen Mapel: ${m} (${k || 'semua kelas'})` : 'Isi nama mata pelajaran di atas dulu';
       }
-      log.innerHTML = list.map(item => `
-        <div class="flex items-center justify-between p-3 rounded-xl bg-emerald-50 border border-emerald-100">
-          <div>
-            <div class="font-bold text-emerald-950 text-xs">${esc(item.nama)}</div>
-            <div class="text-[11px] text-emerald-700">${esc(item.jenjang)} - ${esc(item.kelas)} (NISN: ${esc(item.nisn)})</div>
-          </div>
-          <span class="text-xs font-mono font-bold text-emerald-800 bg-white px-2.5 py-1 rounded-lg border border-emerald-200">${esc(item.waktu)} WIB</span>
-        </div>
-      `).join('');
+      return scanMode === 'masuk' ? 'Absen MASUK' : 'Absen PULANG';
     }
 
-    function getFilteredAttendances() {
-      const periode = document.getElementById('filter-periode').value;
-      const jenjangFilter = document.getElementById('filter-jenjang-rekap').value;
-      const now = new Date();
-
-      return allAttendances.filter(item => {
-        if (jenjangFilter !== 'SEMUA' && item.jenjang !== jenjangFilter) return false;
-        if (periode === 'semua') return true;
-        const itemDate = new Date(item.tanggal + 'T00:00:00');
-        if (periode === 'mingguan') {
-          const sevenDaysAgo = new Date();
-          sevenDaysAgo.setDate(now.getDate() - 7);
-          sevenDaysAgo.setHours(0, 0, 0, 0);
-          return itemDate >= sevenDaysAgo;
-        }
-        if (periode === 'bulanan') {
-          return itemDate.getMonth() === now.getMonth() && itemDate.getFullYear() === now.getFullYear();
-        }
-        return true;
+    function setScanMode(mode) {
+      scanMode = mode;
+      try { sessionStorage.setItem('dh_scan_mode', mode); } catch (e) {}
+      const on = { masuk: 'bg-emerald-700 text-white border-emerald-700 shadow', pulang: 'bg-amber-500 text-white border-amber-500 shadow', mapel: 'bg-sky-600 text-white border-sky-600 shadow' };
+      ['masuk', 'pulang', 'mapel'].forEach(m => {
+        const el = document.getElementById('mode-' + m);
+        if (el) el.className = 'py-3.5 rounded-2xl text-sm sm:text-base font-extrabold border transition ' + (m === mode ? on[m] : 'bg-white text-slate-600 border-slate-300 hover:border-slate-400');
       });
+      document.getElementById('mapel-panel').classList.toggle('hidden', mode !== 'mapel');
+      lastScanned = '';
+      showIdleFeedback();
     }
 
-    function buildStudentSummary(filteredLogs) {
-      const jenjangFilter = document.getElementById('filter-jenjang-rekap').value;
-      const targetStudents = jenjangFilter === 'SEMUA' ? students : students.filter(s => s.jenjang === jenjangFilter);
-
-      return targetStudents.map(s => {
-        const logs = filteredLogs.filter(l => l.nisn === s.nisn);
-        const uniqueDates = [...new Set(logs.map(l => l.tanggal))];
-        return {
-          nisn: s.nisn,
-          nama: s.nama,
-          jenjang: s.jenjang,
-          kelas: s.kelas,
-          total_hadir: uniqueDates.length,
-          terakhir_hadir: uniqueDates.length > 0 ? uniqueDates[0] : '-'
-        };
-      });
+    function initAbsensiTab() {
+      populateKelasOptions();
+      try {
+        document.getElementById('scan-mapel').value = localStorage.getItem('dh_scan_mapel') || '';
+      } catch (e) {}
+      let m = null;
+      try { m = sessionStorage.getItem('dh_scan_mode'); } catch (e) {}
+      setScanMode(m || (new Date().getHours() < 11 ? 'masuk' : 'pulang'));
+      refreshTodayAttendance();
+      setTimeout(startQRScanner, 150);
     }
 
-    function renderRekapTable() {
-      const filteredLogs = getFilteredAttendances();
-      const summary = buildStudentSummary(filteredLogs);
-      document.getElementById('rekap-summary-count').innerText = filteredLogs.length + ' Catatan Scan';
-
-      const tbody = document.getElementById('rekap-table-body');
-      tbody.innerHTML = summary.map(row => `
-        <tr class="hover:bg-slate-50">
-          <td class="p-4 font-mono text-xs">${esc(row.nisn)}</td>
-          <td class="p-4 font-bold text-slate-800">${esc(row.nama)}</td>
-          <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-bold ${row.jenjang === 'PAUD' ? 'bg-sky-100 text-sky-800' : (row.jenjang === 'MTs' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800')}">${esc(row.jenjang)}</span></td>
-          <td class="p-4 text-slate-600">${esc(row.kelas)}</td>
-          <td class="p-4 text-center"><span class="inline-block px-3 py-1 rounded-lg font-extrabold text-xs bg-emerald-50 text-emerald-700 border border-emerald-200">${row.total_hadir} Hari</span></td>
-          <td class="p-4 text-xs text-slate-500 font-mono">${row.terakhir_hadir}</td>
-        </tr>
-      `).join('');
-    }
-
-    function exportAbsensiExcel() {
-      const periode = document.getElementById('filter-periode').value;
-      const jenjangFilter = document.getElementById('filter-jenjang-rekap').value;
-      const filteredLogs = getFilteredAttendances();
-      const summaryData = buildStudentSummary(filteredLogs);
-
-      const sheet1Rows = summaryData.map((r, idx) => ({
-        'No': idx + 1, 'NISN': r.nisn, 'Nama Siswa': r.nama, 'Jenjang': r.jenjang, 'Kelas': r.kelas,
-        'Total Kehadiran (Hari)': r.total_hadir, 'Tanggal Hadir Terakhir': r.terakhir_hadir
-      }));
-
-      const sheet2Rows = filteredLogs.map((l, idx) => ({
-        'No': idx + 1, 'Tanggal': l.tanggal, 'Waktu Scan (WIB)': l.waktu, 'NISN': l.nisn,
-        'Nama Siswa': l.nama, 'Jenjang': l.jenjang, 'Kelas': l.kelas, 'Status': 'Hadir'
-      }));
-
-      const wb = XLSX.utils.book_new();
-      const ws1 = XLSX.utils.json_to_sheet(sheet1Rows);
-      const ws2 = XLSX.utils.json_to_sheet(sheet2Rows);
-      ws1['!cols'] = [{wch:5}, {wch:15}, {wch:28}, {wch:10}, {wch:12}, {wch:22}, {wch:22}];
-      ws2['!cols'] = [{wch:5}, {wch:14}, {wch:16}, {wch:15}, {wch:28}, {wch:10}, {wch:12}, {wch:10}];
-
-      XLSX.utils.book_append_sheet(wb, ws1, 'Rekap Per Siswa');
-      XLSX.utils.book_append_sheet(wb, ws2, 'Log Scan Harian');
-
-      const todayStr = localDateStr();
-      XLSX.writeFile(wb, `Rekap_Absensi_${periode.toUpperCase()}_${jenjangFilter}_DarulHikmah_${todayStr}.xlsx`);
-    }
-
-    // ==================== SCANNER QR ABSENSI ====================
-    let qrScanner = null, qrCameras = [], qrCamIdx = 0, qrBusy = false, lastScanned = '';
-
-    function setScanFeedback(type, msg) {
+    let fbTimer = null;
+    function setScanFeedback(type, title, sub, autoReset = true) {
       const box = document.getElementById('scan-feedback');
       if (!box) return;
-      const colors = {
-        ok: 'bg-emerald-100 text-emerald-800', warn: 'bg-amber-100 text-amber-800',
-        err: 'bg-red-100 text-red-700', info: 'bg-slate-100 text-slate-600'
-      };
-      box.className = 'mt-4 p-3.5 rounded-xl text-xs text-center font-bold ' + (colors[type] || colors.info);
-      box.innerText = msg;
+      const colors = { ok: 'bg-emerald-100 text-emerald-800', warn: 'bg-amber-100 text-amber-800', err: 'bg-red-100 text-red-700', info: 'bg-slate-100 text-slate-600' };
+      const icon = { ok: '✅', warn: '⚠️', err: '❌', info: '📷' }[type] || '';
+      box.className = 'mt-3 p-4 rounded-2xl text-center ' + (colors[type] || colors.info);
+      box.innerHTML = `<div class="text-2xl">${icon}</div><div class="text-lg font-extrabold leading-tight">${esc(title)}</div>` + (sub ? `<div class="text-xs mt-1 font-semibold">${esc(sub)}</div>` : '');
+      clearTimeout(fbTimer);
+      if (autoReset && type !== 'info') fbTimer = setTimeout(showIdleFeedback, 3500);
+    }
+    function showIdleFeedback() {
+      if (!document.getElementById('scan-feedback')) return;
+      const running = !!qrScanner;
+      setScanFeedback('info', running ? 'Siap memindai' : 'Kamera belum aktif', modeDescription(), false);
     }
 
     function setScannerButtons(running) {
-      document.getElementById('btn-scan-start').classList.toggle('hidden', running);
-      document.getElementById('btn-scan-stop').classList.toggle('hidden', !running);
-      document.getElementById('btn-scan-switch').classList.toggle('hidden', !running);
+      const start = document.getElementById('btn-scan-start');
+      if (start) start.classList.toggle('hidden', running);
     }
 
     function cameraErrorMessage(e) {
       const n = String((e && (e.name || e.message)) || e);
-      if (/NotAllowed|Permission/i.test(n)) return 'Izin kamera ditolak. Klik ikon gembok di address bar, izinkan Kamera, lalu coba lagi.';
+      if (/NotAllowed|Permission/i.test(n)) return 'Izin kamera ditolak. Klik ikon gembok di address bar, izinkan Kamera, lalu tekan Aktifkan Kamera.';
       if (/NotFound|device not found/i.test(n)) return 'Kamera tidak ditemukan di perangkat ini.';
-      if (/NotReadable|TrackStart|in use/i.test(n)) return 'Kamera sedang dipakai aplikasi atau tab lain. Tutup dulu lalu coba lagi.';
-      if (/Overconstrained/i.test(n)) return 'Kamera yang diminta tidak tersedia. Coba tombol Ganti Kamera.';
+      if (/NotReadable|TrackStart|in use/i.test(n)) return 'Kamera sedang dipakai aplikasi atau tab lain.';
+      if (/Overconstrained/i.test(n)) return 'Kamera yang diminta tidak tersedia. Coba Ganti Kamera.';
       return 'Gagal membuka kamera: ' + n;
     }
 
@@ -2761,29 +2765,25 @@
       } catch (e) {}
     }
 
+    let qrScanner = null, qrCameras = [], qrCamIdx = 0, qrBusy = false, lastScanned = '';
+
     async function launchScanner(camera) {
       qrScanner = new Html5Qrcode('qr-reader', { verbose: false });
       await qrScanner.start(
         camera,
-        { fps: 10, qrbox: (w, h) => { const s = Math.floor(Math.min(w, h) * 0.7); return { width: s, height: s }; } },
+        { fps: 10, qrbox: (w, h) => { const s = Math.floor(Math.min(w, h) * 0.75); return { width: s, height: s }; } },
         (text) => recordAttendance(text),
         () => {}
       );
       setScannerButtons(true);
-      setScanFeedback('info', 'Kamera aktif. Arahkan kartu QR siswa ke kamera.');
+      showIdleFeedback();
     }
 
     async function startQRScanner() {
-      if (typeof Html5Qrcode === 'undefined') {
-        setScanFeedback('err', 'Library scanner gagal dimuat. Periksa koneksi internet lalu muat ulang halaman.');
-        return;
-      }
-      if (!window.isSecureContext) {
-        setScanFeedback('err', 'Kamera hanya bisa dipakai lewat HTTPS. Buka situs dengan alamat yang diawali https://');
-        return;
-      }
+      if (typeof Html5Qrcode === 'undefined') { setScanFeedback('err', 'Library scanner gagal dimuat', 'Periksa internet lalu muat ulang halaman.', false); return; }
+      if (!window.isSecureContext) { setScanFeedback('err', 'Kamera butuh HTTPS', 'Buka situs dengan alamat berawalan https://', false); return; }
       await stopQRScanner();
-      setScanFeedback('info', 'Membuka kamera...');
+      setScanFeedback('info', 'Membuka kamera...', '', false);
       try {
         await launchScanner({ facingMode: 'environment' });
       } catch (e1) {
@@ -2795,7 +2795,7 @@
           await launchScanner(qrCameras[qrCamIdx].id);
         } catch (e2) {
           await stopQRScanner();
-          setScanFeedback('err', cameraErrorMessage(e2));
+          setScanFeedback('err', 'Kamera tidak bisa dibuka', cameraErrorMessage(e2), false);
         }
       }
     }
@@ -2806,20 +2806,19 @@
         try { qrScanner.clear(); } catch (e) {}
         qrScanner = null;
       }
-      const stopBtn = document.getElementById('btn-scan-stop');
-      if (stopBtn) setScannerButtons(false);
+      setScannerButtons(false);
     }
 
     async function switchCamera() {
       try {
         if (!qrCameras.length) qrCameras = await Html5Qrcode.getCameras();
-        if (qrCameras.length < 2) { setScanFeedback('warn', 'Hanya ada satu kamera di perangkat ini.'); return; }
+        if (qrCameras.length < 2) { setScanFeedback('warn', 'Hanya ada satu kamera'); return; }
         qrCamIdx = (qrCamIdx + 1) % qrCameras.length;
         await stopQRScanner();
         await launchScanner(qrCameras[qrCamIdx].id);
       } catch (e) {
         await stopQRScanner();
-        setScanFeedback('err', cameraErrorMessage(e));
+        setScanFeedback('err', 'Kamera tidak bisa dibuka', cameraErrorMessage(e), false);
       }
     }
 
@@ -2827,14 +2826,13 @@
       const file = e.target.files && e.target.files[0];
       e.target.value = '';
       if (!file) return;
-      if (typeof Html5Qrcode === 'undefined') { setScanFeedback('err', 'Library scanner gagal dimuat.'); return; }
       try {
         const tmp = new Html5Qrcode('qr-file-temp');
         const text = await tmp.scanFile(file, false);
         try { tmp.clear(); } catch (x) {}
         await recordAttendance(text);
       } catch (err) {
-        setScanFeedback('err', 'QR tidak terbaca pada gambar. Gunakan foto yang lebih jelas dan tidak buram.');
+        setScanFeedback('err', 'QR tidak terbaca', 'Gunakan foto yang lebih jelas.');
       }
     }
 
@@ -2846,6 +2844,41 @@
       if (v) recordAttendance(v);
     }
 
+    function refreshTodayAttendance() {
+      const today = localDateStr();
+      const list = allAttendances.filter(a => a.tanggal === today);
+      renderAttendanceLog(list);
+      const st = document.getElementById('stat-hadir');
+      if (st) st.innerText = new Set(list.filter(a => jenisOf(a) === 'masuk').map(a => a.nisn)).size;
+    }
+
+    function renderAttendanceLog(list) {
+      const log = document.getElementById('attendance-log');
+      if (!log) return;
+      ['masuk', 'pulang', 'mapel'].forEach(j => {
+        const el = document.getElementById('cnt-' + j);
+        if (el) el.innerText = (list || []).filter(a => jenisOf(a) === j).length;
+      });
+      if (!list || list.length === 0) {
+        log.innerHTML = '<p class="text-xs text-slate-400 italic">Belum ada scan hari ini.</p>';
+        return;
+      }
+      const badge = { masuk: 'bg-emerald-600', pulang: 'bg-amber-500', mapel: 'bg-sky-600' };
+      log.innerHTML = list.map(item => {
+        const j = jenisOf(item);
+        return `<div class="flex items-center justify-between gap-2 p-3 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="min-w-0">
+            <div class="font-bold text-slate-900 text-xs truncate">${esc(item.nama)}</div>
+            <div class="text-[11px] text-slate-500 truncate">${esc(item.jenjang)} - ${esc(item.kelas)}${j === 'mapel' && item.mapel ? ' · ' + esc(item.mapel) : ''}</div>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="text-[10px] font-bold text-white px-2 py-0.5 rounded-full ${badge[j]}">${JENIS_LABEL[j]}</span>
+            <span class="text-xs font-mono font-bold text-slate-700">${esc(item.waktu)}</span>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
     async function recordAttendance(raw) {
       const nisn = String(raw || '').trim();
       if (!nisn || qrBusy || lastScanned === nisn) return;
@@ -2853,46 +2886,168 @@
       setTimeout(() => { if (lastScanned === nisn) lastScanned = ''; }, 3000);
       qrBusy = true;
       try {
+        const mode = scanMode;
+        let mapel = '';
+        if (mode === 'mapel') {
+          mapel = (document.getElementById('scan-mapel').value || '').trim();
+          if (!mapel) { feedbackSignal(false); setScanFeedback('warn', 'Isi mata pelajaran dulu', 'Pilih mapel di kolom atas, lalu scan lagi.'); lastScanned = ''; return; }
+        }
         const student = students.find(s => String(s.nisn).trim() === nisn);
-        if (!student) {
-          feedbackSignal(false);
-          setScanFeedback('err', `QR tidak dikenal (${nisn}). Pastikan NISN terdaftar di Data Siswa.`);
-          return;
+        if (!student) { feedbackSignal(false); setScanFeedback('err', 'QR tidak dikenal', `NISN ${nisn} belum terdaftar di Data Siswa.`); return; }
+
+        if (mode === 'mapel') {
+          const k = document.getElementById('scan-kelas').value;
+          if (k && String(student.kelas).trim() !== k) {
+            feedbackSignal(false);
+            setScanFeedback('err', 'Bukan siswa kelas ' + k, `${student.nama} berada di kelas ${student.kelas}.`);
+            return;
+          }
         }
 
         const today = localDateStr();
         const nowTime = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', hour12: false }).replace('.', ':');
+        const same = a => String(a.nisn).trim() === nisn && a.tanggal === today && jenisOf(a) === mode &&
+          (mode !== 'mapel' || String(a.mapel || '').toLowerCase() === mapel.toLowerCase());
 
-        let sudah = allAttendances.some(a => String(a.nisn).trim() === nisn && a.tanggal === today);
+        let sudah = allAttendances.some(same);
         if (!sudah) {
-          const { data: cek } = await db.from('attendances').select('id').eq('nisn', student.nisn).eq('tanggal', today).limit(1);
-          sudah = !!(cek && cek.length);
+          const { data: cek } = await db.from('attendances').select('*').eq('nisn', student.nisn).eq('tanggal', today);
+          sudah = !!(cek && cek.some(same));
         }
+        const labelText = mode === 'mapel' ? 'mapel ' + mapel : mode;
         if (sudah) {
           feedbackSignal(false);
-          setScanFeedback('warn', `${student.nama} sudah tercatat hadir hari ini.`);
+          setScanFeedback('warn', student.nama, `Sudah tercatat ${labelText} hari ini.`);
           return;
         }
 
-        const rec = { nisn: student.nisn, nama: student.nama, jenjang: student.jenjang, kelas: student.kelas, tanggal: today, waktu: nowTime };
+        const adaMasuk = allAttendances.some(a => String(a.nisn).trim() === nisn && a.tanggal === today && jenisOf(a) === 'masuk');
+        const rec = { nisn: student.nisn, nama: student.nama, jenjang: student.jenjang, kelas: student.kelas, tanggal: today, waktu: nowTime, jenis: mode, mapel: mode === 'mapel' ? mapel : null };
         const { data: saved, error } = await db.from('attendances').insert([rec]).select();
         if (error) {
           feedbackSignal(false);
-          setScanFeedback('err', 'Gagal menyimpan absensi: ' + error.message);
+          if (/jenis|mapel|column|schema/i.test(error.message)) {
+            setScanFeedback('err', 'Database belum siap', 'Jalankan SQL di bagian "Setup database" (bawah halaman ini).', false);
+          } else {
+            setScanFeedback('err', 'Gagal menyimpan', error.message);
+          }
           return;
         }
 
         allAttendances.unshift((saved && saved[0]) || rec);
-        const todayList = allAttendances.filter(a => a.tanggal === today);
-        renderAttendanceLog(todayList);
-        document.getElementById('stat-hadir').innerText = todayList.length;
+        if (mode === 'mapel') { rememberMapel(mapel); populateKelasOptions(); }
+        refreshTodayAttendance();
         feedbackSignal(true);
-        setScanFeedback('ok', `BERHASIL: ${student.nama} (${student.jenjang} - ${student.kelas}) tercatat hadir pukul ${nowTime}`);
+        let sub = `${student.jenjang} - ${student.kelas} · ${mode === 'mapel' ? mapel : JENIS_LABEL[mode]} · ${nowTime}`;
+        if (mode === 'pulang' && !adaMasuk) sub += ' (belum absen masuk hari ini)';
+        setScanFeedback('ok', student.nama, sub);
       } catch (err) {
-        setScanFeedback('err', 'Terjadi kesalahan: ' + (err.message || err));
+        setScanFeedback('err', 'Terjadi kesalahan', String(err.message || err));
       } finally {
         qrBusy = false;
       }
+    }
+
+    // ---------- Rekap ----------
+    function getFilteredAttendances(allJenis = false) {
+      const periode = document.getElementById('filter-periode').value;
+      const jenjangFilter = document.getElementById('filter-jenjang-rekap').value;
+      const jenis = document.getElementById('filter-jenis-rekap').value;
+      const mapelF = document.getElementById('filter-mapel-rekap').value;
+      const now = new Date();
+      return allAttendances.filter(item => {
+        if (jenjangFilter !== 'SEMUA' && item.jenjang !== jenjangFilter) return false;
+        if (!allJenis) {
+          if (jenisOf(item) !== jenis) return false;
+          if (jenis === 'mapel' && mapelF && String(item.mapel || '') !== mapelF) return false;
+        }
+        if (periode === 'semua') return true;
+        const itemDate = new Date(item.tanggal + 'T00:00:00');
+        if (periode === 'mingguan') {
+          const d = new Date(); d.setDate(now.getDate() - 7); d.setHours(0, 0, 0, 0);
+          return itemDate >= d;
+        }
+        if (periode === 'bulanan') return itemDate.getMonth() === now.getMonth() && itemDate.getFullYear() === now.getFullYear();
+        return true;
+      });
+    }
+
+    function buildStudentSummary(filteredLogs) {
+      const jenjangFilter = document.getElementById('filter-jenjang-rekap').value;
+      const jenis = document.getElementById('filter-jenis-rekap').value;
+      const target = jenjangFilter === 'SEMUA' ? students : students.filter(s => s.jenjang === jenjangFilter);
+      return target.map(s => {
+        const logs = filteredLogs.filter(l => String(l.nisn).trim() === String(s.nisn).trim());
+        const dates = [...new Set(logs.map(l => l.tanggal))].sort().reverse();
+        return {
+          nisn: s.nisn, nama: s.nama, jenjang: s.jenjang, kelas: s.kelas,
+          total_hadir: jenis === 'mapel' ? logs.length : dates.length,
+          unit: jenis === 'mapel' ? 'Pertemuan' : 'Hari',
+          terakhir_hadir: dates.length ? dates[0] : '-'
+        };
+      });
+    }
+
+    function populateMapelFilter() {
+      const jenis = document.getElementById('filter-jenis-rekap').value;
+      const sel = document.getElementById('filter-mapel-rekap');
+      sel.classList.toggle('hidden', jenis !== 'mapel');
+      const keep = sel.value;
+      const list = [...new Set(allAttendances.filter(a => jenisOf(a) === 'mapel' && a.mapel).map(a => a.mapel))].sort((x, y) => x.localeCompare(y, 'id'));
+      sel.innerHTML = '<option value="">Semua mapel</option>' + list.map(m => `<option value="${esc(m)}">${esc(m)}</option>`).join('');
+      sel.value = list.includes(keep) ? keep : '';
+    }
+
+    function renderRekapTable() {
+      populateMapelFilter();
+      const filteredLogs = getFilteredAttendances();
+      const summary = buildStudentSummary(filteredLogs);
+      document.getElementById('rekap-summary-count').innerText = filteredLogs.length + ' Catatan Scan';
+      document.getElementById('rekap-table-body').innerHTML = summary.map(row => `
+        <tr class="hover:bg-slate-50">
+          <td class="p-4 font-mono text-xs">${esc(row.nisn)}</td>
+          <td class="p-4 font-bold text-slate-800">${esc(row.nama)}</td>
+          <td class="p-4"><span class="px-2.5 py-1 rounded-full text-xs font-bold ${row.jenjang === 'PAUD' ? 'bg-sky-100 text-sky-800' : (row.jenjang === 'MTs' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800')}">${esc(row.jenjang)}</span></td>
+          <td class="p-4 text-slate-600">${esc(row.kelas)}</td>
+          <td class="p-4 text-center"><span class="inline-block px-3 py-1 rounded-lg font-extrabold text-xs bg-emerald-50 text-emerald-700 border border-emerald-200">${row.total_hadir} ${row.unit}</span></td>
+          <td class="p-4 text-xs text-slate-500 font-mono">${esc(row.terakhir_hadir)}</td>
+        </tr>`).join('');
+    }
+
+    function exportAbsensiExcel() {
+      const periode = document.getElementById('filter-periode').value;
+      const jenjangFilter = document.getElementById('filter-jenjang-rekap').value;
+      const jenis = document.getElementById('filter-jenis-rekap').value;
+      const summary = buildStudentSummary(getFilteredAttendances());
+      const allLogs = getFilteredAttendances(true).slice().sort((x, y) => (y.tanggal + (y.waktu || '')).localeCompare(x.tanggal + (x.waktu || '')));
+
+      const wb = XLSX.utils.book_new();
+      const ws1 = XLSX.utils.json_to_sheet(summary.map((r, i) => ({
+        'No': i + 1, 'NISN': r.nisn, 'Nama Siswa': r.nama, 'Jenjang': r.jenjang, 'Kelas': r.kelas,
+        ['Jumlah (' + JENIS_LABEL[jenis] + ' - ' + (jenis === 'mapel' ? 'Pertemuan' : 'Hari') + ')']: r.total_hadir,
+        'Tanggal Terakhir': r.terakhir_hadir
+      })));
+      ws1['!cols'] = [{ wch: 5 }, { wch: 15 }, { wch: 28 }, { wch: 10 }, { wch: 12 }, { wch: 26 }, { wch: 18 }];
+      XLSX.utils.book_append_sheet(wb, ws1, 'Rekap Per Siswa');
+
+      const ws2 = XLSX.utils.json_to_sheet(allLogs.map((l, i) => ({
+        'No': i + 1, 'Tanggal': l.tanggal, 'Waktu (WIB)': l.waktu, 'Jenis': JENIS_LABEL[jenisOf(l)], 'Mata Pelajaran': l.mapel || '-',
+        'NISN': l.nisn, 'Nama Siswa': l.nama, 'Jenjang': l.jenjang, 'Kelas': l.kelas
+      })));
+      ws2['!cols'] = [{ wch: 5 }, { wch: 12 }, { wch: 12 }, { wch: 10 }, { wch: 22 }, { wch: 15 }, { wch: 28 }, { wch: 10 }, { wch: 12 }];
+      XLSX.utils.book_append_sheet(wb, ws2, 'Log Scan');
+
+      const mapelLogs = allLogs.filter(l => jenisOf(l) === 'mapel' && l.mapel);
+      if (mapelLogs.length) {
+        const mapelNames = [...new Set(mapelLogs.map(l => l.mapel))].sort((x, y) => x.localeCompare(y, 'id'));
+        const rows = students.filter(s => jenjangFilter === 'SEMUA' || s.jenjang === jenjangFilter).map(s => {
+          const row = { 'NISN': s.nisn, 'Nama Siswa': s.nama, 'Kelas': s.kelas };
+          mapelNames.forEach(m => { row[m] = mapelLogs.filter(l => String(l.nisn).trim() === String(s.nisn).trim() && l.mapel === m).length; });
+          return row;
+        });
+        XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(rows), 'Rekap Per Mapel');
+      }
+      XLSX.writeFile(wb, `Rekap_Absensi_${periode.toUpperCase()}_${jenjangFilter}_${JENIS_LABEL[jenis]}_${localDateStr()}.xlsx`);
     }
   </script>
 
